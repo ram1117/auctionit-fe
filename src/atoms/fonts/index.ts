@@ -1,4 +1,4 @@
-import { Chivo, Raleway, Noto_Sans_JP } from 'next/font/google'
+import { Roboto_Condensed, Noto_Sans_JP, Lobster_Two } from 'next/font/google'
 
 export const notosansjp = Noto_Sans_JP({
   variable: '--var-notosansjp',
@@ -6,12 +6,13 @@ export const notosansjp = Noto_Sans_JP({
   subsets: ['latin'],
 })
 
-export const chivo = Chivo({
-  variable: '--var-chivo',
+export const lobstertwo = Lobster_Two({
+  variable: '--var-lobstertwo',
   subsets: ['latin'],
+  weight: ['400', '700'],
 })
 
-export const raleway = Raleway({
-  variable: '--var-raleway',
+export const roboto = Roboto_Condensed({
+  variable: '--var-roboto',
   subsets: ['latin'],
 })

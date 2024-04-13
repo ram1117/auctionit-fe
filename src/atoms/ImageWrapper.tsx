@@ -5,7 +5,7 @@ interface ImageWrapperProps {
   alt: string
   containerClassName: string
   sizes?: string
-  className: string
+  className?: string
 }
 
 const ImageWrapper = ({

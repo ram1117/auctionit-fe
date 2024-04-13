@@ -16,8 +16,17 @@ const config: Config = {
       },
       fontFamily: {
         notosansjp: 'var(--var-notosansjp)',
-        chivo: 'var(--var-chivo)',
-        raleway: 'var(--var-raleway)',
+        lobstertwo: 'var(--var-lobstertwo)',
+        roboto: 'var(--var-roboto)',
+      },
+      backgroundColor: {
+        'body-bg': '#dce0ed',
+        'section-bg': '#f8f7fc',
+        'button-primary': '#287dfd',
+      },
+      textColor: {
+        'primary-text': '#253262',
+        'secondary-text': '#4a6690',
       },
     },
   },
