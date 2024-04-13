@@ -7,7 +7,7 @@ import ItemIcon from '@/public/menuicons/items.svg'
 
 const NavList = () => {
   return (
-    <ul className="uppercase font-roboto text-secondary-text font-semibold flex flex-col gap-6 p-4">
+    <ul className="uppercase font-roboto text-secondary-text font-semibold flex flex-col items-start gap-6 p-4">
       <NavlistItem title="Home" src={HomeIcon} alt="Home Icon" href="/" />
       <NavlistItem
         title="Following"

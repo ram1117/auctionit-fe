@@ -28,6 +28,9 @@ const config: Config = {
         'primary-text': '#253262',
         'secondary-text': '#4a6690',
       },
+      borderColor: {
+        primary: '#253262',
+      },
     },
   },
   plugins: [],
