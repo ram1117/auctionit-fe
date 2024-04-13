@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "format": "prettier --write \"src/**/*.{tsx,tsx,js}\" ",
+    "format:check": "prettier --write \"src/**/*.{tsx,tsx,js}\" ",
     "prepare": "husky"
   },
   "dependencies": {
@@ -31,12 +31,12 @@
     "typescript": "^5"
   },
   "lint-staged": {
-    "*.ts,*.tsx,*.js": [
+    "**/*.{ts,tsx,js,jsx}": [
       "prettier --check",
-      "eslint max-warnings=0 --fix"
+      "eslint --max-warnings=0 --fix"
     ],
-    "*.md": [
-      "prettier --check"
+    "**/*.md": [
+      "prettier --write"
     ]
   }
 }
