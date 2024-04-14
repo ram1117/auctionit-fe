@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { getLiveAuctions } from '../../services/apiService'
 import AuctionItem from './AuctionItem'
-import { SORT_BY } from '../../app/constants'
+import { SORT_BY } from '../../constants'
 
 const AuctionsContainer = () => {
   const [auctions, setAuctions] = useState<any>([])

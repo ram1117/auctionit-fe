@@ -1,4 +1,4 @@
-import { SORT_BY } from '../app/constants'
+import { SORT_BY } from '../constants'
 
 const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL
 
