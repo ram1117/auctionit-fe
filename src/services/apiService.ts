@@ -40,8 +40,7 @@ export const getLiveAuctions = async (
   sortBy: string = SORT_BY.NEWEST,
   pageNo = 1
 ) => {
-  console.log(`${baseUrl}/auctions/live?page=${pageNo}&sortby=${sortBy}`)
-
+  // console.log(`${baseUrl}/auctions/live?page=${pageNo}&sortby=${sortBy}`)
   return apiGetRequest(
     `${baseUrl}/auctions/live?page=${pageNo}&sortby=${sortBy}`
   )
