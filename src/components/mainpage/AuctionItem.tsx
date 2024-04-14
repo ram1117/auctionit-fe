@@ -25,7 +25,9 @@ const AuctionItem = ({ auction }: AuctionItemProps) => {
           sizes="(max-width:768px) 100vw, 50vw"
           className="rounded-full"
         />
-        <h2 className="font-bold text-lg">{auction.item.name}</h2>
+        <h2 className="font-bold text-lg mx-2 overflow-hidden text-center text-ellipsis w-full text-nowrap">
+          {auction.item.name}
+        </h2>
         <h3>
           Ends in:{' '}
           <span className="text-green-500 font-bold">

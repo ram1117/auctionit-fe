@@ -7,9 +7,6 @@
     "plugin:@typescript-eslint/recommended",
     "prettier"
   ],
-  "ignores": [
-    "next.config.mjs"
-  ],
   "rules": {
     "@typescript-eslint/no-explicit-any": "off"
   }
