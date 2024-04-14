@@ -1,8 +1,14 @@
-export default function Home() {
+import AuctionsContainer from '../components/mainpage/AuctionsContainer'
+
+const Home = async () => {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <h1 className="text-5xl">Auction It</h1>
-      <h2>Sell it fast</h2>
+    <main className="my-1 lg:my-0 p-4 border-2 min-h-screen">
+      <h1 className="text-xl lg:text-3xl text-center font-bold">
+        Live Auctions
+      </h1>
+      <AuctionsContainer />
     </main>
   )
 }
+
+export default Home
