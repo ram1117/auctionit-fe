@@ -17,9 +17,6 @@ const AuctionItem = ({ auction }: AuctionItemProps) => {
   const [hours, minutes] = calculateHours(auction.deadline)
   const bidsCount =
     auction['_count'].bids > 0 ? `${auction['_count'].bids}` : 'No'
-
-  console.log(auction)
-
   if (!auction.item) return <li>Error</li>
 
   return (
