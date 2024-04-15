@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { getLiveAuctions } from '../../services/apiService'
 import AuctionItem from './AuctionItem'
-import { SORT_BY } from '../../app/constants'
+import { SORT_BY } from '../../constants'
 
 const AuctionsContainer = () => {
   const [auctions, setAuctions] = useState<any>([])
@@ -78,15 +78,15 @@ const AuctionsContainer = () => {
         </h2>
       )}
       <div className="my-4">{hasError}</div>
-      <ul className="overflow-scroll h-[80vh] grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2 lg:gap-6">
+      <ul className="overflow-y-scroll h-[80vh] grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2 lg:gap-6">
         {auctions.map((auction: any) => (
           <AuctionItem key={auction.id} auction={auction} />
         ))}
         <li ref={loaderRef} className="h-1" />
       </ul>
       {endOfData && (
-        <p className="my-4 text-center text-xs text-gray-700 w-full">
-          End of Data
+        <p className="my-1 text-center text-xs text-gray-700 w-full">
+          --------------------------------------
         </p>
       )}
     </section>
