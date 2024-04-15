@@ -11,7 +11,11 @@ interface AuctionItemProps {
 const AuctionItem = ({ auction }: AuctionItemProps) => {
   const image =
     auction.item.imageUrl === '' ? NoimageImage : auction.item.imageUrl
+
+  const hasEnded = new Date(auction.deadline) > new Date()
+
   const [hours, minutes] = calculateHours(auction.deadline)
+  const bidValue = auction.bids[0] ? `$ ${auction.bids[0].price}` : 'No Bids'
 
   if (!auction.item) return <li>Error</li>
 
@@ -28,12 +32,16 @@ const AuctionItem = ({ auction }: AuctionItemProps) => {
         <h2 className="font-bold text-lg mx-2 overflow-hidden text-center text-ellipsis w-full text-nowrap">
           {auction.item.name}
         </h2>
-        <h3>
-          Ends in:{' '}
-          <span className="text-green-500 font-bold">
-            {hours} Hrs {minutes} m
-          </span>
-        </h3>
+        {hasEnded && <h3>Auction Ended</h3>}
+        {!hasEnded && (
+          <h3>
+            Ends in:{' '}
+            <span className="text-green-500 font-bold">
+              {hours} Hrs {minutes} m
+            </span>
+          </h3>
+        )}
+        <h3>{bidValue}</h3>
       </li>
     </Link>
   )

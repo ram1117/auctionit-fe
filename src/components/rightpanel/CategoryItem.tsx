@@ -8,7 +8,7 @@ interface CategoryItemProps {
 
 const CategoryItem = ({ category }: CategoryItemProps) => {
   return (
-    <li>
+    <li className="capitalize tracking-tight text-sm">
       <Link
         href={`/category/${category.id}`}
         className="flex lg:gap-2 py-1 px-2 lg:py-2 lg:px-4 border border-primary items-center rounded-lg"

@@ -11,7 +11,9 @@ enum API_METHODS {
 
 const apiGetRequest = async (url: string) => {
   try {
-    const response: any = await fetch(url).then((response) => response.json())
+    const response: any = await fetch(url, { cache: 'no-store' }).then(
+      (response) => response.json()
+    )
 
     return response
   } catch (error) {
@@ -40,10 +42,13 @@ export const getLiveAuctions = async (
   sortBy: string = SORT_BY.NEWEST,
   pageNo = 1
 ) => {
-  // console.log(`${baseUrl}/auctions/live?page=${pageNo}&sortby=${sortBy}`)
   return apiGetRequest(
     `${baseUrl}/auctions/live?page=${pageNo}&sortby=${sortBy}`
   )
+}
+
+export const getAuction = async (id: string) => {
+  return apiGetRequest(`${baseUrl}/auctions/auction/${id}`)
 }
 
 export const postData = () => {

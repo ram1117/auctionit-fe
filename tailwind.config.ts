@@ -14,6 +14,30 @@ const config: Config = {
         'gradient-conic':
           'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
       },
+      keyframes: {
+        borderflash: {
+          '0%': { 'border-color': '#dbeafe' },
+          '50%': { 'border-color': '#60a5fa' },
+          '100%': { 'border-color': '#dbeafe' },
+        },
+        grow: {
+          '0%': { transform: 'scale(1)' },
+          '100%': { transform: 'scale(1.02)' },
+        },
+        fadeIn: {
+          from: {
+            opacity: '0',
+          },
+          to: {
+            opacity: '1',
+          },
+        },
+      },
+      animation: {
+        fadein: 'fadeIn 1s linear',
+        grow: 'grow 1s ease-in-out infinite',
+        'border-flash': 'borderflash 500ms ease-in-out 2',
+      },
       fontFamily: {
         notosansjp: 'var(--var-notosansjp)',
         lobstertwo: 'var(--var-lobstertwo)',
@@ -30,6 +54,7 @@ const config: Config = {
       },
       borderColor: {
         primary: '#253262',
+        secondary: '#287dfd',
       },
     },
   },

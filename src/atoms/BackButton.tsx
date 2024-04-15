@@ -11,7 +11,7 @@ const BackButton = () => {
     router.back()
   }
   return (
-    <div className="py-4 ps-8">
+    <div className="py-4 ps-8 md:block hidden">
       <button
         className="bg-white rounded-full shadow-lg shadow-slate-300"
         onClick={handleClick}
