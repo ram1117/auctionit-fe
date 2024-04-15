@@ -12,10 +12,13 @@ const AuctionItem = ({ auction }: AuctionItemProps) => {
   const image =
     auction.item.imageUrl === '' ? NoimageImage : auction.item.imageUrl
 
-  const hasEnded = new Date(auction.deadline) > new Date()
+  const hasEnded = new Date(auction.deadline) < new Date()
 
   const [hours, minutes] = calculateHours(auction.deadline)
-  const bidValue = auction.bids[0] ? `$ ${auction.bids[0].price}` : 'No Bids'
+  const bidsCount =
+    auction['_count'].bids > 0 ? `${auction['_count'].bids}` : 'No'
+
+  console.log(auction)
 
   if (!auction.item) return <li>Error</li>
 
@@ -41,7 +44,9 @@ const AuctionItem = ({ auction }: AuctionItemProps) => {
             </span>
           </h3>
         )}
-        <h3>{bidValue}</h3>
+        <h3 className="text-sm">
+          <span className="text-base font-bold">{bidsCount}</span> bids
+        </h3>
       </li>
     </Link>
   )
