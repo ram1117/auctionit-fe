@@ -21,12 +21,39 @@ const apiGetRequest = async (url: string) => {
   }
 }
 
+const apiGetRequestSSR = async (url: string, cookie: string) => {
+  try {
+    const response: any = await fetch(url, {
+      headers: { 'Content-type': 'application/json', Cookie: cookie },
+      cache: 'no-store',
+    }).then((response) => response.json())
+
+    return response
+  } catch (error) {
+    throw error
+  }
+}
+
 const apiPostRequest = async (url: string, data: any) => {
   try {
     const response: any = await fetch(url, {
       method: API_METHODS.POST,
       body: JSON.stringify(data),
       headers: { 'Content-type': 'application/json' },
+      credentials: 'include',
+    }).then((response) => response.json())
+    return response
+  } catch (error) {
+    throw error
+  }
+}
+
+const apiPostRequestSSR = async (url: string, data: any, cookie: string) => {
+  try {
+    const response: any = await fetch(url, {
+      method: API_METHODS.POST,
+      body: JSON.stringify(data),
+      headers: { 'Content-type': 'application/json', Cookie: cookie },
     }).then((response) => response.json())
     return response
   } catch (error) {
@@ -51,6 +78,14 @@ export const getAuction = async (id: string) => {
   return apiGetRequest(`${baseUrl}/auctions/auction/${id}`)
 }
 
+export const postDataSSR = () => {
+  return apiPostRequestSSR('', {}, '')
+}
+
 export const postData = () => {
   return apiPostRequest('', {})
+}
+
+export const getDataSSR = () => {
+  return apiGetRequestSSR('', '')
 }
