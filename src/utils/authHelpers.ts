@@ -8,6 +8,6 @@ export const isLoggedIn = () => {
 
 export const getCookie = () => {
   const token = cookies().get('token')
-  if (token && token.value) return `${token?.name}=${token?.value}`
+  if (token) return `${token.name}=${token.value}`
   return undefined
 }

@@ -16,9 +16,9 @@ const config: Config = {
       },
       keyframes: {
         borderflash: {
-          '0%': { 'border-color': '#dbeafe' },
-          '50%': { 'border-color': '#60a5fa' },
-          '100%': { 'border-color': '#dbeafe' },
+          '0%': { 'background-color': '#bfdbfe' },
+          '50%': { 'background-color': '#ffffff' },
+          '100%': { 'background-color': '#bfdbfe' },
         },
         grow: {
           '0%': { transform: 'scale(1)' },
@@ -36,7 +36,7 @@ const config: Config = {
       animation: {
         fadein: 'fadeIn 1s linear',
         grow: 'grow 1s ease-in-out infinite',
-        'border-flash': 'borderflash 500ms ease-in-out 2',
+        'border-flash': 'borderflash 200ms linear 3',
       },
       fontFamily: {
         notosansjp: 'var(--var-notosansjp)',
