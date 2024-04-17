@@ -1,4 +1,5 @@
 import { SORT_BY } from '../constants'
+import { getJWTCookie } from '../utils/authHelpers'
 
 const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL
 
@@ -42,7 +43,7 @@ const apiPostRequest = async (url: string, data: any) => {
       body: JSON.stringify(data),
       headers: { 'Content-type': 'application/json' },
       credentials: 'include',
-    }).then((response) => response.json())
+    })
     return response
   } catch (error) {
     throw error
@@ -80,7 +81,8 @@ export const getAuction = async (id: string) => {
 }
 
 export const getUserInfo = async () => {
-  return await apiGetRequest(`${baseUrl}/user/profile`)
+  const cookie = (await getJWTCookie()) || ''
+  return await apiGetRequestSSR(`${baseUrl}/user/profile`, cookie)
 }
 
 export const signinUser = (data: any) => {

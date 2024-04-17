@@ -1,23 +1,17 @@
-import { signoutUser } from '../../services/apiService'
+'use client'
+
+import SignoutAction from '../../actions/signOut.action'
 
 const SignOut = () => {
-  const handleClick = () => {
-    signoutUser().then((response) => {
-      if (response.success) {
-        window.location.href = '/'
-        // location.reload()
-      }
-    })
-  }
-
   return (
-    <button
-      type="button"
-      className="text-center px-6 py-2 bg-button-primary text-white font-medium rounded-lg"
-      onClick={handleClick}
-    >
-      Sign Out
-    </button>
+    <form action={SignoutAction}>
+      <button
+        type="submit"
+        className="text-center px-6 py-2 bg-button-primary text-white font-medium rounded-lg"
+      >
+        Sign Out
+      </button>
+    </form>
   )
 }
 

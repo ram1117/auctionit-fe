@@ -1,12 +1,13 @@
 'use server'
 import { cookies } from 'next/headers'
 
-export const isLoggedIn = () => {
-  const token = cookies().get('token')
-  return token && token.value
+export const getUserRole = () => {
+  const token = cookies().get('role')
+  if (token && token.value) return token.value
+  return undefined
 }
 
-export const getCookie = () => {
+export const getJWTCookie = () => {
   const token = cookies().get('token')
   if (token) return `${token.name}=${token.value}`
   return undefined

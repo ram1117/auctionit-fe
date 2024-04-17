@@ -5,7 +5,11 @@ import AuctionIcon from '@/public/menuicons/auction.svg'
 import AccountIcon from '@/public/menuicons/account.svg'
 import ItemIcon from '@/public/menuicons/items.svg'
 
-const NavList = () => {
+interface NavListProps {
+  role: string | undefined
+}
+
+const NavList = ({ role }: NavListProps) => {
   return (
     <ul className="uppercase font-roboto text-secondary-text font-semibold flex flex-col items-start gap-6 p-4">
       <NavlistItem title="Home" src={HomeIcon} alt="Home Icon" href="/" />
@@ -33,6 +37,15 @@ const NavList = () => {
         alt="Account Icon"
         href="/account"
       />
+
+      {role === 'admin' && (
+        <NavlistItem
+          title="Dashboard"
+          src={AccountIcon}
+          alt="Account Icon"
+          href="/admin/dashboard"
+        />
+      )}
     </ul>
   )
 }
