@@ -5,6 +5,7 @@ import InputField from '../../../atoms/InputField'
 import { useFormState } from 'react-dom'
 import FormSubmit from '../../../atoms/FormSubmit'
 import SignupAction from '../../../actions/signUp.action'
+import { useEffect } from 'react'
 
 export interface SignupFormStateType {
   errors: {
@@ -21,6 +22,10 @@ export interface SignupFormStateType {
 const SignupPage = () => {
   const initialState: SignupFormStateType = { errors: { _form: [''] } }
   const [formState, formAction] = useFormState(SignupAction, initialState)
+
+  useEffect(() => {
+    console.log(formState)
+  }, [formState])
 
   return (
     <div className="w-full p-4 max-w-[576px]">
