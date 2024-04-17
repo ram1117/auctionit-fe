@@ -11,7 +11,7 @@ const AuthOption = async ({ isLoggedIn }: AuthOptionProps) => {
       {!isLoggedIn && (
         <Link
           href="/auth/signin"
-          className="uppercase w-2/3 py-2 my-16 bg-button-primary text-white font-medium rounded-lg text-center"
+          className="text-center text-sm lg:text-base py-1 px-4 lg:px-10 lg:py-2 bg-button-primary text-white font-medium rounded-lg"
         >
           Login
         </Link>

@@ -4,6 +4,7 @@ import Link from 'next/link'
 import InputField from '../../atoms/InputField'
 import { useFormState } from 'react-dom'
 import SignInAction from '../../actions/signIn.action'
+import { useSearchParams } from 'next/navigation'
 
 export interface LoginFormStateType {
   errors: {
@@ -14,8 +15,12 @@ export interface LoginFormStateType {
 }
 
 const LoginForm = () => {
+  const searchParams = useSearchParams()
+  const nextUrl = searchParams.get('next') || '/'
+
   const initialState: LoginFormStateType = { errors: { _form: [''] } }
-  const [formState, formAction] = useFormState(SignInAction, initialState)
+  const bindedFormAction = SignInAction.bind(null, nextUrl)
+  const [formState, formAction] = useFormState(bindedFormAction, initialState)
 
   return (
     <section className="fixed inset-0 flex flex-col items-center justify-center z-[999] backdrop-blur">

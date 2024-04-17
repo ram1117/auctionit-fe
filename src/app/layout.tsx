@@ -2,7 +2,6 @@ import type { Metadata } from 'next'
 import './globals.css'
 import { roboto, notosansjp, lobstertwo } from '../atoms/fonts'
 import RightPanel from '../components/rightpanel/RightPanel'
-import CategoriesContainer from '../components/rightpanel/CategoriesContainer'
 import NavPanel from '../components/navbar/NavPanel'
 
 export const metadata: Metadata = {
@@ -27,10 +26,6 @@ export default function RootLayout({
             <NavPanel />
           </section>
           <section className="w-full min-h-[95vh] lg:min-h-[85vh] lg:w-8/12 bg-section-bg">
-            <div className="block lg:hidden">
-              <CategoriesContainer />
-            </div>
-
             {children}
           </section>
           <section className="w-full lg:w-2/12 lg:block hidden">

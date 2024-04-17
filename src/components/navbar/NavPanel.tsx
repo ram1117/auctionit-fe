@@ -1,18 +1,28 @@
 import NavList from './NavList'
 import AuthOption from './AuthOption'
 import { getUserRole } from '../../utils/authHelpers'
+import MobileMenu from './MobileMenu'
+import Link from 'next/link'
 
 const NavPanel = async () => {
   const userRole = await getUserRole()
-  console.log()
   return (
-    <nav className="h-full p-4">
-      <h2 className="font-lobstertwo text-2xl lg:text-3xl font-bold text-center border-b py-4">
-        Auction It
-      </h2>
-      <div className="py-4 mb-4 flex flex-col items-center">
-        {userRole && <NavList role={userRole} />}
+    <nav className="h-full p-1 px-4 lg:p-4 flex lg:flex-col items-center justify-between">
+      <div>
+        <Link href="/">
+          <h2 className="font-lobstertwo text-2xl lg:text-3xl font-bold text-center lg:border-b py-1 lg:py-4">
+            Auction It
+          </h2>
+        </Link>
+
+        <div className="hidden lg:block">
+          {userRole && <NavList role={userRole} />}
+        </div>
+      </div>
+
+      <div className="py-1 lg:py-4 lg:mb-4 flex lg:flex-col items-center">
         <AuthOption isLoggedIn={userRole ? true : false} />
+        {userRole && <MobileMenu role={userRole} />}
       </div>
     </nav>
   )

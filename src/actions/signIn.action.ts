@@ -12,6 +12,7 @@ const validationSchema = z.object({
 })
 
 const SignInAction = async (
+  nextUrl: string,
   formState: LoginFormStateType,
   formData: FormData
 ): Promise<LoginFormStateType> => {
@@ -43,8 +44,8 @@ const SignInAction = async (
     return { errors: { _form: ['Soemthing went wrong.'] } }
   }
 
-  revalidatePath('/', 'layout')
-  redirect('/')
+  revalidatePath(nextUrl, 'layout')
+  redirect(nextUrl)
 }
 
 export default SignInAction
