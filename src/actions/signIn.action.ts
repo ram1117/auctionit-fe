@@ -4,7 +4,7 @@ import { signinUser } from '../services/apiService'
 import { cookies } from 'next/headers'
 import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
-import { LoginFormStateType } from '../components/navbar/LoginForm'
+import { LoginFormStateType } from '../app/auth/signin/page'
 
 const validationSchema = z.object({
   email: z.string().email('Please enter valid email'),

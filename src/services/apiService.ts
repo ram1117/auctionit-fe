@@ -90,6 +90,10 @@ export const signinUser = (data: any) => {
   return apiPostRequest(`${baseUrl}/auth/signin`, data)
 }
 
+export const signupUser = (data: any) => {
+  return apiPostRequest(`${baseUrl}/auth/signup`, data)
+}
+
 export const signoutUser = () => {
   return apiPostRequest(`${baseUrl}/auth/signout`, {})
 }

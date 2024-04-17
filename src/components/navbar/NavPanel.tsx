@@ -1,5 +1,5 @@
 import NavList from './NavList'
-import AuthOption from './AuthOption'
+import AuthOption from '../auth/AuthOption'
 import { getUserRole } from '../../utils/authHelpers'
 import MobileMenu from './MobileMenu'
 import Link from 'next/link'
@@ -7,7 +7,7 @@ import Link from 'next/link'
 const NavPanel = async () => {
   const userRole = await getUserRole()
   return (
-    <nav className="h-full p-1 px-4 lg:p-4 flex lg:flex-col items-center justify-between">
+    <nav className="h-full p-1 px-4 lg:p-4 flex lg:flex-col items-center justify-between lg:justify-start">
       <div>
         <Link href="/">
           <h2 className="font-lobstertwo text-2xl lg:text-3xl font-bold text-center lg:border-b py-1 lg:py-4">
