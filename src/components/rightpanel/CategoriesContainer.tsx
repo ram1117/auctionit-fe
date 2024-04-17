@@ -1,30 +1,31 @@
 import CategoryItem from './CategoryItem'
 import { CategoryType } from './types'
-import { getItemCategories } from '../../services/apiService'
-import { useEffect, useState } from 'react'
 
-const CategoriesContainer = () => {
-  const [error, setError] = useState<string | undefined>()
-  const [categories, setCategories] = useState([])
+interface CategoriesContainerProps {
+  handleCategoryClick: (category: number) => void
+  categories: any
+}
 
-  useEffect(() => {
-    getItemCategories().then((response) => {
-      if (response.error) {
-        setError('Error fetching data')
-      } else {
-        setCategories(response)
-      }
-    })
-  }, [])
-
+const CategoriesContainer = ({
+  handleCategoryClick,
+  categories,
+}: CategoriesContainerProps) => {
   return (
-    <section className="py-1 lg:py-4 m-2 lg:m-0">
-      {error && <h3 className="my-4">{error}</h3>}
+    <section className="py-1 m-1">
       <ul className="lg:h-4/5 overflow-y-scroll text-secondary-text font-semibold flex lg:flex-wrap gap-1 lg:gap-4 p-1 lg:p-4 my-1 lg:my-4 text-sm lg:text-base">
-        {!error &&
-          categories.map((category: CategoryType) => (
-            <CategoryItem key={category.id} category={category} />
-          ))}
+        <button
+          className="capitalize tracking-tight text-sm flex gap-2 border rounded-md py-1 lg:py-2 px-4 border-primary items-center"
+          onClick={() => handleCategoryClick(0)}
+        >
+          <h4 className="text-nowrap lg:text-wrap">All</h4>
+        </button>
+        {categories.map((category: CategoryType) => (
+          <CategoryItem
+            key={category.id}
+            category={category}
+            handleCategoryClick={handleCategoryClick}
+          />
+        ))}
       </ul>
     </section>
   )

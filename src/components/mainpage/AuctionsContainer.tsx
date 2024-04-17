@@ -6,12 +6,18 @@ import AuctionItem from './AuctionItem'
 import CategoriesContainer from '../rightpanel/CategoriesContainer'
 import { SORT_BY } from '../../constants'
 
-const AuctionsContainer = () => {
+interface AuctionsContainerProps {
+  categories: any
+}
+
+const AuctionsContainer = ({ categories }: AuctionsContainerProps) => {
   const [auctions, setAuctions] = useState<any>([])
+  const [loading, setLoading] = useState(false)
   const [hasError, setHasError] = useState(false)
   const [pageNo, setPageNo] = useState(1)
   const [endOfData, setEndOfData] = useState(false)
   const [sortBy, setSortBy] = useState('newest')
+  const [categoryId, setCategoryId] = useState(0)
   const loaderRef = useRef(null)
 
   const handleClick = async (sort: string) => {
@@ -20,12 +26,25 @@ const AuctionsContainer = () => {
     setEndOfData(false)
     setHasError(false)
     setAuctions([])
+    setCategoryId(0)
+    setLoading(false)
+  }
+
+  const handleCategoryClick = (category: number) => {
+    setSortBy('newest')
+    setPageNo(1)
+    setEndOfData(false)
+    setHasError(false)
+    setAuctions([])
+    setCategoryId(category)
+    setLoading(false)
   }
 
   const fetchData = useCallback(
     function () {
+      setLoading(true)
       if (!endOfData) {
-        getLiveAuctions(sortBy, pageNo)
+        getLiveAuctions(sortBy, pageNo, categoryId)
           .then((data) => {
             if (data.length !== 0) {
               setAuctions((prev: any) => [...prev, ...data])
@@ -33,13 +52,14 @@ const AuctionsContainer = () => {
             } else {
               setEndOfData(true)
             }
+            setLoading(false)
           })
           .catch(() => {
             setHasError(true)
           })
       }
     },
-    [pageNo, sortBy, endOfData]
+    [pageNo, sortBy, endOfData, categoryId]
   )
 
   useEffect(() => {
@@ -59,8 +79,11 @@ const AuctionsContainer = () => {
   }, [fetchData])
 
   return (
-    <section className="my-4 relative">
-      <CategoriesContainer />
+    <section className="relative">
+      <CategoriesContainer
+        handleCategoryClick={handleCategoryClick}
+        categories={categories}
+      />
       <ul className="flex gap-2 lg:gap-4 justify-center sm:justify-end items-center text-sm">
         <li className="border-r border-r-black px-2">
           <button onClick={() => handleClick(SORT_BY.NEWEST)}>Newest</button>
@@ -80,18 +103,21 @@ const AuctionsContainer = () => {
           Error fetching data
         </h2>
       )}
-      {auctions.length === 0 && (
-        <h2 className="text-center text-base lg:text-lg my-18">
-          No Live Auctions at the moment
-        </h2>
-      )}
+      <div>
+        {auctions.length === 0 && (
+          <h2 className="text-center text-base lg:text-lg my-18">
+            No Live Auctions at the moment
+          </h2>
+        )}
+        <ul className="h-[80vh] my-8 overflow-y-scroll grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-2 lg:gap-6">
+          {loading &&
+            auctions.map((auction: any) => (
+              <AuctionItem key={auction.id} auction={auction} />
+            ))}
+          <li ref={loaderRef} className="h-1" />
+        </ul>
+      </div>
 
-      <ul className="h-[80vh] overflow-y-scroll grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-2 lg:gap-6">
-        {auctions.map((auction: any) => (
-          <AuctionItem key={auction.id} auction={auction} />
-        ))}
-        <li ref={loaderRef} className="h-1" />
-      </ul>
       {endOfData && (
         <p className="my-1 text-center text-xs text-gray-700 w-full">
           --------------------------------------

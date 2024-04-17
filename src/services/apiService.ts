@@ -69,10 +69,11 @@ export const getItemCategories = async () => {
 
 export const getLiveAuctions = async (
   sortBy: string = SORT_BY.NEWEST,
-  pageNo = 1
+  pageNo = 1,
+  categoryId: number
 ) => {
   return await apiGetRequest(
-    `${baseUrl}/auctions/live?page=${pageNo}&sortby=${sortBy}`
+    `${baseUrl}/auctions/live?page=${pageNo}&sortby=${sortBy}&category=${categoryId}`
   )
 }
 
