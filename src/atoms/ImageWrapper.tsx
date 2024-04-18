@@ -1,7 +1,8 @@
 import Image from 'next/image'
+import { StaticImageData } from 'next/image'
 
 interface ImageWrapperProps {
-  src: string
+  src: string | StaticImageData
   alt: string
   containerClassName: string
   sizes?: string

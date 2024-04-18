@@ -13,7 +13,7 @@ const NavList = ({ role }: NavListProps) => {
     <ul className="uppercase font-roboto text-secondary-text font-semibold flex flex-col items-start gap-6 p-4">
       <NavlistItem title="Home" src={HomeIcon} alt="Home Icon" href="/" />
       <NavlistItem
-        title="Following"
+        title="Subscribed"
         src={PlusIcon}
         alt="Subscription Icon"
         href="/subscribed"

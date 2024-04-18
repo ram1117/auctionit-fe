@@ -6,7 +6,6 @@ interface TimerProps {
 
 const Timer = ({ time }: TimerProps) => {
   const [dhours, dminutes] = calculateHours(time)
-
   const textcolor = parseInt(dhours) < 1 ? 'text-red-700' : 'text-green-500'
 
   return (
