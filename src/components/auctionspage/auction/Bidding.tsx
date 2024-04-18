@@ -2,15 +2,26 @@
 
 import { useEffect, useState } from 'react'
 import socket from '../../../utils/socket'
+import PlacebidAction from '../../../actions/placebid.action'
+import FormSubmit from '../../../atoms/FormSubmit'
+import { useFormState } from 'react-dom'
 
 interface BiddingProps {
   topBid: any | undefined
   auctionId: string
 }
 
+export interface PlacebidFormStateType {
+  success?: boolean
+  errors: {
+    _form?: string[]
+    price?: string[]
+  }
+}
+
 const Bidding = ({ topBid, auctionId }: BiddingProps) => {
   const [bid, setBid] = useState(topBid)
-  const bidValue = bid ? `$ ${bid.price}` : 'No bids'
+  const bidValue = bid ? bid.price : 0
 
   useEffect(() => {
     if (socket) {
@@ -23,6 +34,15 @@ const Bidding = ({ topBid, auctionId }: BiddingProps) => {
       })
     }
   }, [auctionId])
+
+  const bindedAction = PlacebidAction.bind(null, auctionId, bidValue)
+
+  const initialState: PlacebidFormStateType = {
+    success: false,
+    errors: { _form: [] },
+  }
+
+  const [formState, formAction] = useFormState(bindedAction, initialState)
 
   return (
     <div className="p-4 my-4">
@@ -37,20 +57,36 @@ const Bidding = ({ topBid, auctionId }: BiddingProps) => {
         </p>
       </div>
 
-      <form className="w-full grid grid-cols-2 gap-4">
+      <form
+        className="w-full grid grid-cols-2 gap-4 items-center"
+        action={formAction}
+      >
         <input
-          className="p-2 rounded-md border-2 border-button-primary"
+          className="p-2 rounded-md border-2"
           type="number"
-          max={9999999}
-          min={bid?.price}
+          step={0.05}
+          name="price"
+          id="price"
           required
         />
-        <button
-          type="submit"
-          className="bg-button-primary text-white rounded-md shadow-md shadow-slate-400"
-        >
-          Place Bid
-        </button>
+
+        <FormSubmit
+          buttonText="Place Bid"
+          pendingText="Placing..."
+          className="!my-0"
+        />
+        {formState.success && (
+          <p className="text-sm text-green-700 font-bold">
+            {'Bid Placed successfully'}
+          </p>
+        )}
+
+        <p className="text-sm text-red-700">
+          {formState?.errors['price']?.join(',')}
+        </p>
+        <p className="text-sm text-red-700">
+          {formState?.errors['_form']?.join(',')}
+        </p>
       </form>
     </div>
   )

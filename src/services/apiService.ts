@@ -56,7 +56,7 @@ const apiPostRequestSSR = async (url: string, data: any, cookie: string) => {
       method: API_METHODS.POST,
       body: JSON.stringify(data),
       headers: { 'Content-type': 'application/json', Cookie: cookie },
-    }).then((response) => response.json())
+    })
     return response
   } catch (error) {
     throw error
@@ -98,8 +98,14 @@ export const signoutUser = () => {
   return apiPostRequest(`${baseUrl}/auth/signout`, {})
 }
 
-export const postDataSSR = () => {
-  return apiPostRequestSSR('', {}, '')
+export const getSubscribedAuctions = async () => {
+  const cookie = (await getJWTCookie()) || ''
+  return apiGetRequestSSR(`${baseUrl}/subscribe`, cookie)
+}
+
+export const postBid = async (data: any) => {
+  const cookie = (await getJWTCookie()) || ''
+  return apiPostRequestSSR(`${baseUrl}/bid`, data, cookie)
 }
 
 export const postData = () => {

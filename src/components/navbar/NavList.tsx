@@ -1,7 +1,6 @@
 import NavlistItem from './NavListItem'
 import HomeIcon from '@/public/menuicons/home.svg'
 import PlusIcon from '@/public/menuicons/subscription.svg'
-import AuctionIcon from '@/public/menuicons/auction.svg'
 import AccountIcon from '@/public/menuicons/account.svg'
 import ItemIcon from '@/public/menuicons/items.svg'
 
@@ -18,12 +17,6 @@ const NavList = ({ role }: NavListProps) => {
         src={PlusIcon}
         alt="Subscription Icon"
         href="/subscribed"
-      />
-      <NavlistItem
-        title="My Auctions"
-        src={AuctionIcon}
-        alt="Auction Icon"
-        href="/auctions"
       />
       <NavlistItem
         title="My Items"
