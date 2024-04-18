@@ -48,13 +48,20 @@ const Bidding = ({ topBid, auctionId }: BiddingProps) => {
     <div className="p-4 my-4">
       <h5 className="font-light text-xs lg:text-sm text-center">Top Bid</h5>
       <div
-        className="flex items-center justify-around my-4 py-8 border rounded-md bg-blue-100 border-secondary animate-border-flash"
+        className="flex items-center justify-center my-4 py-8 border rounded-md bg-blue-100 border-secondary animate-border-flash"
         key={bidValue}
       >
-        <h5 className="text-lg lg:text-2xl font-semibold">{bidValue}</h5>
-        <p className="text-sm">
-          <span className="font-bold">{bid?.username}</span>
-        </p>
+        {bidValue <= 0 && (
+          <h5 className="text-lg lg:text-2xl font-semibold">No Bids yet</h5>
+        )}
+        {bidValue > 0 && (
+          <div className="w-full flex gap-2 justify-around items-center">
+            <h5 className="text-lg lg:text-2xl font-semibold">$ {bidValue}</h5>
+            <p className="text-sm">
+              <span className="font-bold">{bid?.username}</span>
+            </p>
+          </div>
+        )}
       </div>
 
       <form

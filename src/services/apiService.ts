@@ -78,7 +78,8 @@ export const getLiveAuctions = async (
 }
 
 export const getAuction = async (id: string) => {
-  return await apiGetRequest(`${baseUrl}/auctions/auction/${id}`)
+  const cookie = (await getJWTCookie()) || ''
+  return await apiGetRequestSSR(`${baseUrl}/auctions/auction/${id}`, cookie)
 }
 
 export const getUserInfo = async () => {
@@ -103,9 +104,23 @@ export const getSubscribedAuctions = async () => {
   return apiGetRequestSSR(`${baseUrl}/subscribe`, cookie)
 }
 
+export const getSubscribedAuction = async (auctionId: string) => {
+  const cookie = (await getJWTCookie()) || ''
+  return apiGetRequestSSR(`${baseUrl}/subscribe/${auctionId}`, cookie)
+}
+
 export const postBid = async (data: any) => {
   const cookie = (await getJWTCookie()) || ''
   return apiPostRequestSSR(`${baseUrl}/bid`, data, cookie)
+}
+
+export const postNotification = async (id: string, enabled: boolean) => {
+  const cookie = (await getJWTCookie()) || ''
+  return apiPostRequestSSR(
+    `${baseUrl}/subscribe/${id}?enabled=${!enabled}`,
+    { notificationEnabled: true },
+    cookie
+  )
 }
 
 export const postData = () => {

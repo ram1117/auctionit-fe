@@ -1,10 +1,11 @@
 import BackButton from '../../../atoms/BackButton'
 import ImageWrapper from '../../../atoms/ImageWrapper'
-import { getAuction } from '../../../services/apiService'
+import { getAuction, getSubscribedAuction } from '../../../services/apiService'
 import NoPhotoImage from '@/public/no-image.jpg'
 import Timer from '../../../components/auctionspage/auction/Timer'
 import Price from '../../../components/auctionspage/auction/Price'
 import Bidding from '../../../components/auctionspage/auction/Bidding'
+import FollowPanel from '../../../components/auctionspage/auction/FollowPanel'
 
 const AuctionPage = async ({ params }: { params: { auctionid: string } }) => {
   const auctionId = params.auctionid
@@ -17,6 +18,8 @@ const AuctionPage = async ({ params }: { params: { auctionid: string } }) => {
     ? { price: topBid.price, username: topBid.bidder.username }
     : undefined
 
+  const subscription = await getSubscribedAuction(auctionId)
+
   return (
     <main className="p-4">
       <BackButton />
@@ -25,10 +28,7 @@ const AuctionPage = async ({ params }: { params: { auctionid: string } }) => {
           <h1 className="text-xl gap-4 lg:text-4xl font-bold">
             {auction.item.name}
           </h1>
-          <button className="bg-button-primary text-white px-2 lg:px-4 py-1 rounded-md shadow-md shadow-slate-400 flex gap-2 items-center">
-            <span className="text-xl lg:text-3xl font-bold">+</span>
-            Follow
-          </button>
+          <FollowPanel auctionId={auctionId} subscription={subscription} />
         </header>
 
         <div className="w-full my-4 lg:my-6 ">
