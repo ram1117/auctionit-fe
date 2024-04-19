@@ -109,7 +109,7 @@ const AuctionsContainer = ({ categories }: AuctionsContainerProps) => {
             No Live Auctions at the moment
           </h2>
         )}
-        <ul className="h-[80vh] my-8 overflow-y-scroll grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-2 lg:gap-6">
+        <ul className="h-[80vh] my-8 overflow-y-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-2 lg:gap-6">
           {loading &&
             auctions.map((auction: any) => (
               <AuctionItem key={auction.id} auction={auction} />

@@ -27,7 +27,9 @@ const SubscribeItem = ({ auction, price }: SubscribeItemProps) => {
         />
         <div className="p-2 flex gap-1 flex-col">
           <h3 className="text-lg font-semibold">{item.name}</h3>
-          {hasEnded && <h3 className="text-xs">Auction Ended</h3>}
+          {hasEnded && (
+            <h3 className="text-base text-red-500">Auction Ended</h3>
+          )}
           {!hasEnded && (
             <h5 className="text-xs">
               Ends in{' '}
@@ -39,7 +41,7 @@ const SubscribeItem = ({ auction, price }: SubscribeItemProps) => {
           {userPrice && (
             <h5 className="text-xs">
               Bid Price
-              <span className="text-base font-bold mx-1">{userPrice}</span>
+              <span className="text-base font-bold mx-1"> ${userPrice}</span>
             </h5>
           )}
         </div>
