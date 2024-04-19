@@ -1,6 +1,9 @@
 import BackButton from '../../atoms/BackButton'
+// import { getUserInfo } from '../../services/apiService'
 
-const AccountPage = () => {
+const AccountPage = async () => {
+  // const userInfo = await getUserInfo()
+  // console.log(userInfo)
   return (
     <main className="min-h-screen p-4">
       <BackButton />

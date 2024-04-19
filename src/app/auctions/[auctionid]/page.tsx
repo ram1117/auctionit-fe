@@ -1,6 +1,6 @@
 import BackButton from '../../../atoms/BackButton'
 import ImageWrapper from '../../../atoms/ImageWrapper'
-import { getAuction, getSubscribedAuction } from '../../../services/apiService'
+import { getAuction, getNotificationStatus } from '../../../services/apiService'
 import NoPhotoImage from '@/public/no-image.jpg'
 import Timer from '../../../components/auctionspage/auction/Timer'
 import Price from '../../../components/auctionspage/auction/Price'
@@ -18,7 +18,7 @@ const AuctionPage = async ({ params }: { params: { auctionid: string } }) => {
     ? { price: topBid.price, username: topBid.bidder.username }
     : undefined
 
-  const subscription = await getSubscribedAuction(auctionId)
+  const subscription = await getNotificationStatus(auctionId)
 
   return (
     <main className="p-4">

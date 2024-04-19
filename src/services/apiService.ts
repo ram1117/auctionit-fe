@@ -23,7 +23,8 @@ const apiGetRequest = async (url: string) => {
   }
 }
 
-const apiGetRequestSSR = async (url: string, cookie: string) => {
+const apiGetRequestSSR = async (url: string) => {
+  const cookie = (await getJWTCookie()) || ''
   try {
     const response: any = await fetch(url, {
       headers: { 'Content-type': 'application/json', Cookie: cookie },
@@ -50,7 +51,9 @@ const apiPostRequest = async (url: string, data: any) => {
   }
 }
 
-const apiPostRequestSSR = async (url: string, data: any, cookie: string) => {
+const apiPostRequestSSR = async (url: string, data: any) => {
+  const cookie = (await getJWTCookie()) || ''
+
   try {
     const response: any = await fetch(url, {
       method: API_METHODS.POST,
@@ -78,13 +81,11 @@ export const getLiveAuctions = async (
 }
 
 export const getAuction = async (id: string) => {
-  const cookie = (await getJWTCookie()) || ''
-  return await apiGetRequestSSR(`${baseUrl}/auctions/auction/${id}`, cookie)
+  return await apiGetRequestSSR(`${baseUrl}/auctions/auction/${id}`)
 }
 
 export const getUserInfo = async () => {
-  const cookie = (await getJWTCookie()) || ''
-  return await apiGetRequestSSR(`${baseUrl}/user/profile`, cookie)
+  return await apiGetRequestSSR(`${baseUrl}/user/profile`)
 }
 
 export const signinUser = (data: any) => {
@@ -99,34 +100,36 @@ export const signoutUser = () => {
   return apiPostRequest(`${baseUrl}/auth/signout`, {})
 }
 
-export const getSubscribedAuctions = async () => {
-  const cookie = (await getJWTCookie()) || ''
-  return apiGetRequestSSR(`${baseUrl}/subscribe`, cookie)
+export const getPlacedBids = async () => {
+  return apiGetRequestSSR(`${baseUrl}/bid/user/all`)
 }
 
-export const getSubscribedAuction = async (auctionId: string) => {
-  const cookie = (await getJWTCookie()) || ''
-  return apiGetRequestSSR(`${baseUrl}/subscribe/${auctionId}`, cookie)
+export const getNotificationStatus = async (auctionId: string) => {
+  return await apiGetRequestSSR(`${baseUrl}/subscribe/${auctionId}`)
+}
+
+export const getItemsWon = async () => {
+  return apiGetRequestSSR(`${baseUrl}/items/user/items`)
 }
 
 export const postBid = async (data: any) => {
-  const cookie = (await getJWTCookie()) || ''
-  return apiPostRequestSSR(`${baseUrl}/bid`, data, cookie)
+  return apiPostRequestSSR(`${baseUrl}/bid`, data)
 }
 
-export const postNotification = async (id: string, enabled: boolean) => {
-  const cookie = (await getJWTCookie()) || ''
-  return apiPostRequestSSR(
-    `${baseUrl}/subscribe/${id}?enabled=${!enabled}`,
-    { notificationEnabled: true },
-    cookie
-  )
+export const updateNotification = (id: string, enabled: boolean) => {
+  console.log('Notification  ', enabled)
+  if (enabled)
+    return apiPostRequest(`${baseUrl}/notification/unsubscribe/${id}`, {})
+  else return apiPostRequest(`${baseUrl}/notification/subscribe/${id}`, {})
 }
 
-export const postData = () => {
-  return apiPostRequest('', {})
+export const getTokenFromDatabase = () => {
+  return apiGetRequest(`${baseUrl}/notification/tokens/`)
 }
 
-export const getDataSSR = () => {
-  return apiGetRequestSSR('', '')
+export const postNotificationToken = (token: string) => {
+  return apiPostRequest(`${baseUrl}/notification/token/`, {
+    device_type: 'browser',
+    notification_token: token,
+  })
 }

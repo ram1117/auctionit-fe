@@ -1,9 +1,9 @@
 import SubscribeItem from '../../components/subscribe/SubscribeItem'
-import { getSubscribedAuctions } from '../../services/apiService'
+import { getPlacedBids } from '../../services/apiService'
 import BackButton from '../../atoms/BackButton'
 
 const AuctionsPage = async () => {
-  const subscriptions = await getSubscribedAuctions()
+  const bids = await getPlacedBids()
 
   return (
     <main className="min-h-screen p-4">
@@ -12,11 +12,8 @@ const AuctionsPage = async () => {
         My Auctions
       </h1>
       <ul className="my-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-        {subscriptions.map((subscription: any) => (
-          <SubscribeItem
-            subscription={subscription}
-            key={subscription.auction_id}
-          />
+        {bids.map((bid: any) => (
+          <SubscribeItem auction={bid.auction} price={bid.price} key={bid.id} />
         ))}
       </ul>
     </main>
