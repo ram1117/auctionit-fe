@@ -25,6 +25,7 @@ export default function RootLayout({
           <section className="w-full lg:w-2/12">
             <NavPanel />
           </section>
+
           <section className="w-full min-h-[95vh] lg:min-h-[85vh] lg:w-8/12 bg-section-bg">
             {children}
           </section>

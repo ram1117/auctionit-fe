@@ -1,10 +1,11 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import socket from '../../../utils/socket'
 import PlacebidAction from '../../../actions/placebid.action'
 import FormSubmit from '../../../atoms/FormSubmit'
 import { useFormState } from 'react-dom'
+import { Socket, io } from 'socket.io-client'
+import { DefaultEventsMap } from '@socket.io/component-emitter'
 
 interface BiddingProps {
   topBid: any | undefined
@@ -24,16 +25,18 @@ const Bidding = ({ topBid, auctionId }: BiddingProps) => {
   const bidValue = bid ? bid.price : 0
 
   useEffect(() => {
+    const socket: Socket<DefaultEventsMap, DefaultEventsMap> = io(
+      process.env.NEXT_PUBLIC_SOCKET_URL || ''
+    )
     if (socket) {
       socket.on('connect', () => {
         socket.emit('place-bid-join', auctionId)
       })
-
       socket.on('new_bid_placed', (data: any) => {
         setBid(data)
       })
     }
-  }, [auctionId])
+  })
 
   const bindedAction = PlacebidAction.bind(null, auctionId, bidValue)
 

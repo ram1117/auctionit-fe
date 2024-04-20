@@ -23,7 +23,6 @@ try {
 if (messaging) {
   try {
     messaging.onBackgroundMessage(messaging, (payload) => {
-      console.log(payload)
       const notificationTitle = payload.notification.title
       const notificationOptions = {
         body: payload.notification.body,

@@ -117,7 +117,6 @@ export const postBid = async (data: any) => {
 }
 
 export const updateNotification = (id: string, enabled: boolean) => {
-  console.log('Notification  ', enabled)
   if (enabled)
     return apiPostRequest(`${baseUrl}/notification/unsubscribe/${id}`, {})
   else return apiPostRequest(`${baseUrl}/notification/subscribe/${id}`, {})
