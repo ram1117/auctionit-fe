@@ -1,5 +1,6 @@
+'use client'
+
 import { initializeApp } from 'firebase/app'
-import { getMessaging } from 'firebase/messaging'
 
 const FIREBASE_CONFIG = {
   apiKey: 'AIzaSyAuSHX2HGtiAeKNW54lJBjMXf4R2YHnur0',
@@ -12,5 +13,4 @@ const FIREBASE_CONFIG = {
 }
 
 const firebaseApp = initializeApp(FIREBASE_CONFIG)
-export const messaging = getMessaging(firebaseApp)
 export default firebaseApp

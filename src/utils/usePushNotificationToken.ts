@@ -1,7 +1,9 @@
-import { getToken } from 'firebase/messaging'
-import { messaging } from '../firebase'
+import { getMessaging, getToken } from 'firebase/messaging'
+import firebaseApp from '../firebase'
 
-const setPushNotificationToken = async () => {
+const getPushNotificationToken = async () => {
+  const messaging = getMessaging(firebaseApp)
+
   const permission = await Notification.requestPermission()
 
   if (permission === 'granted') {
@@ -11,4 +13,4 @@ const setPushNotificationToken = async () => {
   return null
 }
 
-export default setPushNotificationToken
+export default getPushNotificationToken

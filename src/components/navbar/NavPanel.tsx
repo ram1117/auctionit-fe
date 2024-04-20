@@ -1,7 +1,7 @@
 import NavList from './NavList'
 import AuthOption from '../auth/AuthOption'
 import { getUserRole } from '../../utils/authHelpers'
-import MobileMenu from './MobileMenu'
+// import MobileMenu from './MobileMenu'
 import Link from 'next/link'
 
 const NavPanel = async () => {
@@ -22,7 +22,7 @@ const NavPanel = async () => {
 
       <div className="py-1 lg:py-4 lg:mb-4 flex lg:flex-col items-center">
         <AuthOption isLoggedIn={userRole ? true : false} />
-        {userRole && <MobileMenu role={userRole} />}
+        {/* {userRole && <MobileMenu role={userRole} />} */}
       </div>
     </nav>
   )

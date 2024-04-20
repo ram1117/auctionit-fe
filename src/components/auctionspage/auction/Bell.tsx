@@ -4,12 +4,7 @@ import ImageWrapper from '../../../atoms/ImageWrapper'
 import BellEnabled from '@/public/icons/bell.svg'
 import BellDisabled from '@/public/icons/bell-disabled.svg'
 import LoadingIcon from '@/public/icons/loading.svg'
-import {
-  getTokenFromDatabase,
-  postNotificationToken,
-  updateNotification,
-} from '../../../services/apiService'
-import setPushNotificationToken from '../../../utils/usePushNotificationToken'
+import { updateNotification } from '../../../services/apiService'
 import { useState } from 'react'
 
 interface BellProps {
@@ -32,15 +27,7 @@ const Bell = ({ auctionId, enabled }: BellProps) => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     setLoading(true)
-    const existingTokens = await getTokenFromDatabase()
-    const deviceToken = await setPushNotificationToken()
 
-    if (deviceToken && !existingTokens.includes(deviceToken)) {
-      const response = await postNotificationToken(deviceToken)
-      if (response.status !== 201) {
-        setErrors('Unable to set notification')
-      }
-    }
     const notificationResponse = await updateNotification(auctionId, enabled)
     if (notificationResponse.status !== 201) {
       setErrors('Unable to set notification')
