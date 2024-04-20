@@ -1,8 +1,10 @@
 import NavList from './NavList'
 import AuthOption from '../auth/AuthOption'
 import { getUserRole } from '../../utils/authHelpers'
-import MobileMenu from './MobileMenu'
+// import MobileMenu from './MobileMenu'
 import Link from 'next/link'
+import MobileMenu from './MobileMenu'
+import React from 'react'
 
 const NavPanel = async () => {
   const userRole = await getUserRole()
@@ -28,4 +30,4 @@ const NavPanel = async () => {
   )
 }
 
-export default NavPanel
+export default React.memo(NavPanel)

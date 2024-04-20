@@ -6,7 +6,7 @@ const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL
 enum API_METHODS {
   GET = 'GET',
   POST = 'POST',
-  UPDATE = 'UPDATE',
+  PATCH = 'PATCH',
   DELETE = 'DELETE',
 }
 
@@ -23,7 +23,8 @@ const apiGetRequest = async (url: string) => {
   }
 }
 
-const apiGetRequestSSR = async (url: string, cookie: string) => {
+const apiGetRequestSSR = async (url: string) => {
+  const cookie = (await getJWTCookie()) || ''
   try {
     const response: any = await fetch(url, {
       headers: { 'Content-type': 'application/json', Cookie: cookie },
@@ -50,13 +51,30 @@ const apiPostRequest = async (url: string, data: any) => {
   }
 }
 
-const apiPostRequestSSR = async (url: string, data: any, cookie: string) => {
+const apiPostRequestSSR = async (url: string, data: any) => {
+  const cookie = (await getJWTCookie()) || ''
+
   try {
     const response: any = await fetch(url, {
       method: API_METHODS.POST,
       body: JSON.stringify(data),
       headers: { 'Content-type': 'application/json', Cookie: cookie },
-    }).then((response) => response.json())
+    })
+    return response
+  } catch (error) {
+    throw error
+  }
+}
+
+const apiPatchRequestSSR = async (url: string, data: any) => {
+  const cookie = (await getJWTCookie()) || ''
+
+  try {
+    const response: any = await fetch(url, {
+      method: API_METHODS.PATCH,
+      body: JSON.stringify(data),
+      headers: { 'Content-type': 'application/json', Cookie: cookie },
+    })
     return response
   } catch (error) {
     throw error
@@ -78,12 +96,11 @@ export const getLiveAuctions = async (
 }
 
 export const getAuction = async (id: string) => {
-  return await apiGetRequest(`${baseUrl}/auctions/auction/${id}`)
+  return await apiGetRequestSSR(`${baseUrl}/auctions/auction/${id}`)
 }
 
 export const getUserInfo = async () => {
-  const cookie = (await getJWTCookie()) || ''
-  return await apiGetRequestSSR(`${baseUrl}/user/profile`, cookie)
+  return await apiGetRequestSSR(`${baseUrl}/user/profile`)
 }
 
 export const signinUser = (data: any) => {
@@ -98,14 +115,43 @@ export const signoutUser = () => {
   return apiPostRequest(`${baseUrl}/auth/signout`, {})
 }
 
-export const postDataSSR = () => {
-  return apiPostRequestSSR('', {}, '')
+export const getPlacedBids = async () => {
+  return apiGetRequestSSR(`${baseUrl}/bid/user/all`)
 }
 
-export const postData = () => {
-  return apiPostRequest('', {})
+export const getNotificationStatus = async (auctionId: string) => {
+  return await apiGetRequestSSR(`${baseUrl}/subscribe/${auctionId}`)
 }
 
-export const getDataSSR = () => {
-  return apiGetRequestSSR('', '')
+export const getItemsWon = async () => {
+  return apiGetRequestSSR(`${baseUrl}/items/user/items`)
+}
+
+export const postBid = async (data: any) => {
+  return apiPostRequestSSR(`${baseUrl}/bid`, data)
+}
+
+export const updateNotification = (id: string, enabled: boolean) => {
+  if (enabled)
+    return apiPostRequest(`${baseUrl}/notification/unsubscribe/${id}`, {})
+  else return apiPostRequest(`${baseUrl}/notification/subscribe/${id}`, {})
+}
+
+export const getTokenFromDatabase = () => {
+  return apiGetRequest(`${baseUrl}/notification/tokens/`)
+}
+
+export const postNotificationToken = (token: string) => {
+  return apiPostRequest(`${baseUrl}/notification/token/`, {
+    device_type: 'browser',
+    notification_token: token,
+  })
+}
+
+export const updateUsername = async (data: any) => {
+  return apiPatchRequestSSR(`${baseUrl}/user/username`, data)
+}
+
+export const updatePassword = async (data: any) => {
+  return apiPatchRequestSSR(`${baseUrl}/user/password`, data)
 }

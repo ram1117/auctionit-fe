@@ -49,7 +49,6 @@ const SignupAction = async (
 
   try {
     const response = await signupUser(validation.data)
-    console.log(response.status)
     if (response.status !== 201) {
       const error = await response.json()
       return { errors: { _form: [error.message] } }

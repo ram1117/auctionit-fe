@@ -1,3 +1,4 @@
+import React from 'react'
 import ImageWrapper from '../../atoms/ImageWrapper'
 
 interface NavlistItemProps {
@@ -16,4 +17,4 @@ const NavlistItem = ({ href, src, alt, title }: NavlistItemProps) => {
   )
 }
 
-export default NavlistItem
+export default React.memo(NavlistItem)

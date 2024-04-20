@@ -1,4 +1,3 @@
-import ImageWrapper from '../../atoms/ImageWrapper'
 import { CategoryType } from './types'
 
 interface CategoryItemProps {
@@ -9,17 +8,14 @@ interface CategoryItemProps {
 const CategoryItem = ({ category, handleCategoryClick }: CategoryItemProps) => {
   return (
     <button
-      className="capitalize tracking-tight text-sm flex gap-2 border rounded-md py-1 lg:py-2 px-4 border-primary items-center"
+      className="capitalize tracking-tight text-sm gap-2 border rounded-md py-1 lg:py-2 px-2"
       onClick={() => {
         handleCategoryClick(category.id)
       }}
     >
-      <ImageWrapper
-        src={category.iconUrl}
-        alt={`${category.type} Icon`}
-        containerClassName="h-3 w-3 lg:h-6 lg:w-6 hidden lg:block"
-      />
-      <h4 className="text-nowrap lg:text-wrap">{category.type}</h4>
+      <h4 className="text-nowrap lg:text-wrap w-full items-center">
+        {category.type}
+      </h4>
     </button>
   )
 }

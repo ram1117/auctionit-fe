@@ -1,5 +1,5 @@
 interface InputFieldProps {
-  label: string
+  label?: string
   type: string
   name: string
   id: string
@@ -9,7 +9,7 @@ interface InputFieldProps {
 }
 
 const InputField = ({
-  label,
+  label = '',
   type,
   name,
   id,

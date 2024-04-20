@@ -5,7 +5,7 @@ const Home = async () => {
   const categories = await getItemCategories()
 
   return (
-    <main className="my-1 lg:my-0 p-4 border-2 min-h-screen">
+    <main className="my-1 lg:my-0 p-4 min-h-screen">
       <AuctionsContainer categories={categories} />
     </main>
   )

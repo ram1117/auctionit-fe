@@ -1,5 +1,3 @@
-'use client'
-
 import { Socket, io } from 'socket.io-client'
 import { DefaultEventsMap } from '@socket.io/component-emitter'
 
