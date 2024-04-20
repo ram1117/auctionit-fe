@@ -32,7 +32,7 @@ const AlertsContainer = () => {
     onMessage(messaging, (payload) => {
       setMessages((prev: any) => [...prev, payload])
     })
-  })
+  }, [])
 
   return (
     <section className="py-4 h-screen overflow-y-auto">

@@ -6,7 +6,7 @@ const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL
 enum API_METHODS {
   GET = 'GET',
   POST = 'POST',
-  UPDATE = 'UPDATE',
+  PATCH = 'PATCH',
   DELETE = 'DELETE',
 }
 
@@ -57,6 +57,21 @@ const apiPostRequestSSR = async (url: string, data: any) => {
   try {
     const response: any = await fetch(url, {
       method: API_METHODS.POST,
+      body: JSON.stringify(data),
+      headers: { 'Content-type': 'application/json', Cookie: cookie },
+    })
+    return response
+  } catch (error) {
+    throw error
+  }
+}
+
+const apiPatchRequestSSR = async (url: string, data: any) => {
+  const cookie = (await getJWTCookie()) || ''
+
+  try {
+    const response: any = await fetch(url, {
+      method: API_METHODS.PATCH,
       body: JSON.stringify(data),
       headers: { 'Content-type': 'application/json', Cookie: cookie },
     })
@@ -131,4 +146,12 @@ export const postNotificationToken = (token: string) => {
     device_type: 'browser',
     notification_token: token,
   })
+}
+
+export const updateUsername = async (data: any) => {
+  return apiPatchRequestSSR(`${baseUrl}/user/username`, data)
+}
+
+export const updatePassword = async (data: any) => {
+  return apiPatchRequestSSR(`${baseUrl}/user/password`, data)
 }
