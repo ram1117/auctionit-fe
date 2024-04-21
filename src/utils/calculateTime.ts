@@ -1,6 +1,7 @@
 export const calculateHours = (date: string) => {
   const today = new Date()
   const futureDay = new Date(date)
+  if (futureDay < today) return '00:00'.split(':')
 
   const difference = (futureDay.getTime() - today.getTime()) / 1000 / (60 * 60)
   const newDate = new Date(0, 0)

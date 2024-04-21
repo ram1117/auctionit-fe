@@ -155,3 +155,35 @@ export const updateUsername = async (data: any) => {
 export const updatePassword = async (data: any) => {
   return apiPatchRequestSSR(`${baseUrl}/user/password`, data)
 }
+
+export const getAdminItems = async (status: string) => {
+  return apiGetRequest(`${baseUrl}/items/allitems?status=${status}`)
+}
+
+export const getItemDetails = (id: string) => {
+  return apiGetRequestSSR(`${baseUrl}/items/item/${id}`)
+}
+
+export const createNewItem = (data: any) => {
+  return apiPostRequestSSR(`${baseUrl}/items`, data)
+}
+
+export const updateItem = async (id: string, notforSale: boolean) => {
+  return apiPatchRequestSSR(`${baseUrl}/items/${id}?status=${notforSale}`, {})
+}
+
+export const getAuctionCategories = () => {
+  return apiGetRequest(`${baseUrl}/auctions/auction/categories`)
+}
+
+export const createNewAuction = (data: any) => {
+  return apiPostRequestSSR(`${baseUrl}/auctions`, data)
+}
+
+export const getAdminAuctions = (status: string) => {
+  return apiGetRequest(`${baseUrl}/auctions/admin/auctions?status=${status}`)
+}
+
+export const cancelAuction = (itemId: string) => {
+  return apiPatchRequestSSR(`${baseUrl}/auctions/${itemId}`, {})
+}

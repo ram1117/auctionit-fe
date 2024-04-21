@@ -6,10 +6,21 @@ import Timer from '../../../components/auctionspage/auction/Timer'
 import Price from '../../../components/auctionspage/auction/Price'
 import Bidding from '../../../components/auctionspage/auction/Bidding'
 import FollowPanel from '../../../components/auctionspage/auction/FollowPanel'
+import { getUserRole } from '../../../utils/authHelpers'
 
 const AuctionPage = async ({ params }: { params: { auctionid: string } }) => {
   const auctionId = params.auctionid
   const auction = await getAuction(auctionId)
+  const userRole = getUserRole() || ''
+
+  if (auction.error) {
+    return (
+      <main className="p-4">
+        <p className="text-red-500 text-center">{auction.message}</p>
+      </main>
+    )
+  }
+
   const itemImage =
     auction.item.imageUrl.length === 0 ? NoPhotoImage : auction.item.imageUrl
 
@@ -18,6 +29,7 @@ const AuctionPage = async ({ params }: { params: { auctionid: string } }) => {
     ? { price: topBid.price, username: topBid.bidder.username }
     : undefined
 
+  const auctionEnded = new Date(auction.deadline) < new Date()
   const subscription = await getNotificationStatus(auctionId)
 
   return (
@@ -33,22 +45,44 @@ const AuctionPage = async ({ params }: { params: { auctionid: string } }) => {
 
         <div className="w-full my-4 lg:my-6 ">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 p-2">
-            <div className="p-4 flex flex-col items-center justify-center rounded-xl shadow-lg shadow-slate-300">
+            <div className="relative p-4 flex flex-col items-center justify-center rounded-xl shadow-lg shadow-slate-300">
               <ImageWrapper
                 src={itemImage}
                 alt="auction item image"
                 containerClassName="w-4/5 aspect-square"
                 className="rounded-full"
               />
+              {auctionEnded && (
+                <h4 className="rotate absolute -top-4 left-20 text-2xl lg:text-4xl font-black track-wider text-red-500 p-4 border-4 border-red-500">
+                  ENDED
+                </h4>
+              )}
+
+              {auction.isCancelled && (
+                <h4 className="rotate absolute -top-4 left-20 text-2xl lg:text-4xl font-black track-wider text-red-500 p-4 border-4 border-red-500">
+                  CANCELLED
+                </h4>
+              )}
             </div>
 
             <div className=" p-2 rounded-xl shadow-lg shadow-slate-300">
               <div className="grid grid-cols-2">
-                <Timer time={auction.deadline}></Timer>
+                {
+                  <Timer
+                    time={auction.deadline}
+                    isCancelled={auction.isCancelled}
+                  />
+                }
                 <Price price={auction.start_value}></Price>
               </div>
 
-              <Bidding topBid={bidData} auctionId={auction.id} />
+              <Bidding
+                topBid={bidData}
+                auctionId={auction.id}
+                auctionEnded={auctionEnded}
+                userRole={userRole}
+                isCancelled={auction.isCancelled}
+              />
             </div>
           </div>
           <div className="p-8 rounded-xl shadow-lg shadow-slate-300">

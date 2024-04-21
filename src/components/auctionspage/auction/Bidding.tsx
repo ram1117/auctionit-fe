@@ -10,6 +10,9 @@ import { DefaultEventsMap } from '@socket.io/component-emitter'
 interface BiddingProps {
   topBid: any | undefined
   auctionId: string
+  auctionEnded: boolean
+  userRole: string
+  isCancelled: boolean
 }
 
 export interface PlacebidFormStateType {
@@ -20,7 +23,13 @@ export interface PlacebidFormStateType {
   }
 }
 
-const Bidding = ({ topBid, auctionId }: BiddingProps) => {
+const Bidding = ({
+  topBid,
+  auctionId,
+  auctionEnded,
+  userRole,
+  isCancelled,
+}: BiddingProps) => {
   const [bid, setBid] = useState(topBid)
   const bidValue = bid ? bid.price : 0
 
@@ -66,38 +75,39 @@ const Bidding = ({ topBid, auctionId }: BiddingProps) => {
           </div>
         )}
       </div>
+      {!auctionEnded && userRole === 'user' && !isCancelled && (
+        <form
+          className="w-full grid grid-cols-2 gap-4 items-center"
+          action={formAction}
+        >
+          <input
+            className="p-2 rounded-md border-2"
+            type="number"
+            step={0.05}
+            name="price"
+            id="price"
+            required
+          />
 
-      <form
-        className="w-full grid grid-cols-2 gap-4 items-center"
-        action={formAction}
-      >
-        <input
-          className="p-2 rounded-md border-2"
-          type="number"
-          step={0.05}
-          name="price"
-          id="price"
-          required
-        />
+          <FormSubmit
+            buttonText="Place Bid"
+            pendingText="Placing..."
+            className="!my-0"
+          />
+          {formState.success && (
+            <p className="text-sm text-green-700 font-bold">
+              {'Bid Placed successfully'}
+            </p>
+          )}
 
-        <FormSubmit
-          buttonText="Place Bid"
-          pendingText="Placing..."
-          className="!my-0"
-        />
-        {formState.success && (
-          <p className="text-sm text-green-700 font-bold">
-            {'Bid Placed successfully'}
+          <p className="text-sm text-red-700">
+            {formState?.errors['price']?.join(',')}
           </p>
-        )}
-
-        <p className="text-sm text-red-700">
-          {formState?.errors['price']?.join(',')}
-        </p>
-        <p className="text-sm text-red-700">
-          {formState?.errors['_form']?.join(',')}
-        </p>
-      </form>
+          <p className="text-sm text-red-700">
+            {formState?.errors['_form']?.join(',')}
+          </p>
+        </form>
+      )}
     </div>
   )
 }

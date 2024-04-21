@@ -1,6 +1,6 @@
 import BackButton from '../../atoms/BackButton'
-import { getItemsWon } from '../../services/apiService'
 import Item from '../../components/items/Item'
+import { getItemsWon } from '../../services/apiService'
 
 const ItemsPage = async () => {
   const items = await getItemsWon()
