@@ -3,6 +3,7 @@ import HomeIcon from '@/public/menuicons/home.svg'
 import PlusIcon from '@/public/menuicons/subscription.svg'
 import AccountIcon from '@/public/menuicons/account.svg'
 import ItemIcon from '@/public/menuicons/items.svg'
+import AdminNav from './AdminNav'
 
 interface NavListProps {
   role: string | undefined
@@ -31,14 +32,7 @@ const NavList = ({ role }: NavListProps) => {
         href="/account"
       />
 
-      {role === 'admin' && (
-        <NavlistItem
-          title="Dashboard"
-          src={AccountIcon}
-          alt="Account Icon"
-          href="/admin/dashboard"
-        />
-      )}
+      {role === 'admin' && <AdminNav />}
     </ul>
   )
 }
