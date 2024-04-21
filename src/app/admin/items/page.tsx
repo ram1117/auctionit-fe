@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import BackButton from '../../../atoms/BackButton'
 import { getAdminItems } from '../../../services/apiService'
 import ItemCard from '../../../components/admin/ItemCard'
+import AddItemForm from '../../../components/admin/AddItemForm'
 
 enum STATUS {
   SOLD = 'sold',
@@ -16,6 +17,7 @@ const Page = () => {
   const [itemStatus, setItemStatus] = useState(STATUS.UNSOLD)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
+  const [formOpen, setFormOpen] = useState(false)
 
   useEffect(() => {
     getAdminItems(itemStatus).then((response) => {
@@ -30,6 +32,10 @@ const Page = () => {
     setItemStatus(status)
   }
 
+  const handleFormButtonClick = () => {
+    setFormOpen((prev) => !prev)
+  }
+
   return (
     <main className="p-4">
       <BackButton />
@@ -37,7 +43,10 @@ const Page = () => {
         <h2 className="text-lg lg:text-xl font-semibold uppercase lg:my-4">
           Items
         </h2>
-        <button className="border-1 py-1 px-2 lg:px-4 bg-button-primary text-white shadow-lg shadow-slate-300 rounded-lg">
+        <button
+          onClick={handleFormButtonClick}
+          className="border-1 py-1 px-2 lg:px-4 bg-button-primary text-white shadow-lg shadow-slate-300 rounded-lg"
+        >
           Add item
         </button>
       </div>
@@ -65,6 +74,7 @@ const Page = () => {
           </ul>
         )}
       </div>
+      {formOpen && <AddItemForm setFormOpen={setFormOpen} />}
     </main>
   )
 }

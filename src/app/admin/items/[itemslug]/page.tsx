@@ -4,6 +4,7 @@ import ImageWrapper from '../../../../atoms/ImageWrapper'
 import { getItemDetails } from '../../../../services/apiService'
 import NoPhotoImage from '@/public/no-image.jpg'
 import Timer from '../../../../components/auctionspage/auction/Timer'
+import UpdateItemForm from '../../../../components/admin/UpdateItemForm'
 
 const Page = async ({ params }: { params: { itemslug: string } }) => {
   const itemId = params.itemslug
@@ -24,10 +25,14 @@ const Page = async ({ params }: { params: { itemslug: string } }) => {
     <main className="p-4">
       <BackButton />
       <section className="px-2 lg:px-10 my-4">
-        <header className="flex items-center justify-between">
+        <header className="flex items-center justify-between flex-col md:flex-row gap-2">
           <h1 className="text-xl gap-4 lg:text-4xl font-bold">
             {itemDetails.name}
           </h1>
+          <UpdateItemForm
+            notforSale={itemDetails.not_for_sale}
+            itemId={itemDetails.id}
+          />
         </header>
 
         <div className="w-full my-4 lg:my-6 ">
