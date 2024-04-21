@@ -13,7 +13,6 @@ const UpdateItemAction = async (
 
     if (response.status !== 200) {
       const error = await response.json()
-      console.log(error.message)
       return { errors: { _form: [error.message] } }
     }
   } catch (error) {

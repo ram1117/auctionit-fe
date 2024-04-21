@@ -81,20 +81,6 @@ const apiPatchRequestSSR = async (url: string, data: any) => {
   }
 }
 
-// const apiPatchRequest = async (url: string, data: any) => {
-//   try {
-//     const response: any = await fetch(url, {
-//       method: API_METHODS.PATCH,
-//       body: JSON.stringify(data),
-//       headers: { 'Content-type': 'application/json' },
-//       credentials: 'include',
-//     })
-//     return response
-//   } catch (error) {
-//     throw error
-//   }
-// }
-
 export const getItemCategories = async () => {
   return apiGetRequest(`${baseUrl}/items/types`)
 }
@@ -183,6 +169,21 @@ export const createNewItem = (data: any) => {
 }
 
 export const updateItem = async (id: string, notforSale: boolean) => {
-  console.log(id)
   return apiPatchRequestSSR(`${baseUrl}/items/${id}?status=${notforSale}`, {})
+}
+
+export const getAuctionCategories = () => {
+  return apiGetRequest(`${baseUrl}/auctions/auction/categories`)
+}
+
+export const createNewAuction = (data: any) => {
+  return apiPostRequestSSR(`${baseUrl}/auctions`, data)
+}
+
+export const getAdminAuctions = (status: string) => {
+  return apiGetRequest(`${baseUrl}/auctions/admin/auctions?status=${status}`)
+}
+
+export const cancelAuction = (itemId: string) => {
+  return apiPatchRequestSSR(`${baseUrl}/auctions/${itemId}`, {})
 }

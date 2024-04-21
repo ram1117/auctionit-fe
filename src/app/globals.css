@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+.grid-height {
+  grid-auto-rows: 1fr;
+}
+
 .rotate {
   writing-mode: vertical-lr;
   -webkit-transform: rotate(-135deg);

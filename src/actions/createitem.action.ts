@@ -36,8 +36,6 @@ const CreateItemAction = async (
   formState: ItemFormStateType,
   formData: FormData
 ): Promise<ItemFormStateType> => {
-  console.log(formData.get('item_image'))
-
   const validation = validationSchema.safeParse(
     Object.fromEntries(formData.entries())
   )

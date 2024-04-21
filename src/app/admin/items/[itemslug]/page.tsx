@@ -5,6 +5,7 @@ import { getItemDetails } from '../../../../services/apiService'
 import NoPhotoImage from '@/public/no-image.jpg'
 import Timer from '../../../../components/auctionspage/auction/Timer'
 import UpdateItemForm from '../../../../components/admin/UpdateItemForm'
+import CreateAuctionForm from '../../../../components/admin/CreateAuctionForm'
 
 const Page = async ({ params }: { params: { itemslug: string } }) => {
   const itemId = params.itemslug
@@ -45,19 +46,23 @@ const Page = async ({ params }: { params: { itemslug: string } }) => {
                 className="rounded-full"
               />
               {itemDetails.isSold && (
-                <h4 className="rotate absolute top-2 left-12 text-4xl font-black track-wider text-green-500">
+                <h4 className="rotate absolute top-2 left-12 text-4xl font-black track-wider text-green-500 border-4 p-4 border-green-500">
                   SOLD
                 </h4>
               )}
               {itemDetails.not_for_sale && (
-                <h4 className="rotate absolute -top-8 left-20 text-2xl lg:text-4xl font-black track-wider text-red-500">
+                <h4 className="rotate absolute -top-8 left-20 text-2xl lg:text-4xl font-black track-wider text-red-500 border-4 p-4 border-red-500">
                   NOT FOR SALE
                 </h4>
               )}
             </div>
 
             <div className=" p-2 rounded-xl shadow-lg shadow-slate-300 h-[45vh] lg:h-full overflow-y-auto">
-              <h5 className="text-lg font-bold border-b p-4 ">Auctions</h5>
+              <div className="border-b p-4 flex items-center justify-between">
+                <h5 className="text-lg font-bold  ">Auctions</h5>
+                <CreateAuctionForm item_id={itemDetails.id}></CreateAuctionForm>
+              </div>
+
               <ul className="my-4">
                 {itemDetails.auctions.map((auction: any) => (
                   <Link href={`/auctions/${auction.id}`} key={auction.id}>
@@ -65,6 +70,7 @@ const Page = async ({ params }: { params: { itemslug: string } }) => {
                       <p className="">{auction.id}</p>
                       <Timer
                         time={auction.deadline}
+                        isCancelled={auction.isCancelled}
                         className="!flex-row !gap-2 !p-1 w-max"
                         fontSize="!text-lg"
                       />
@@ -92,7 +98,7 @@ const Page = async ({ params }: { params: { itemslug: string } }) => {
                   </h2>
                 </div>
                 <div className="border p-4 rounded-xl">
-                  <h2 className="text-sm">Lcoation</h2>
+                  <h2 className="text-sm">Location</h2>
                   <h2 className="text-base font-semibold">
                     {winningBid.bidder.location}
                   </h2>

@@ -53,15 +53,26 @@ const AuctionPage = async ({ params }: { params: { auctionid: string } }) => {
                 className="rounded-full"
               />
               {auctionEnded && (
-                <h4 className="rotate absolute -top-4 left-20 text-2xl lg:text-4xl font-black track-wider text-red-500">
+                <h4 className="rotate absolute -top-4 left-20 text-2xl lg:text-4xl font-black track-wider text-red-500 p-4 border-4 border-red-500">
                   ENDED
+                </h4>
+              )}
+
+              {auction.isCancelled && (
+                <h4 className="rotate absolute -top-4 left-20 text-2xl lg:text-4xl font-black track-wider text-red-500 p-4 border-4 border-red-500">
+                  CANCELLED
                 </h4>
               )}
             </div>
 
             <div className=" p-2 rounded-xl shadow-lg shadow-slate-300">
               <div className="grid grid-cols-2">
-                <Timer time={auction.deadline}></Timer>
+                {
+                  <Timer
+                    time={auction.deadline}
+                    isCancelled={auction.isCancelled}
+                  />
+                }
                 <Price price={auction.start_value}></Price>
               </div>
 
@@ -70,6 +81,7 @@ const AuctionPage = async ({ params }: { params: { auctionid: string } }) => {
                 auctionId={auction.id}
                 auctionEnded={auctionEnded}
                 userRole={userRole}
+                isCancelled={auction.isCancelled}
               />
             </div>
           </div>

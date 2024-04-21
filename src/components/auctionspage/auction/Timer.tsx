@@ -2,15 +2,22 @@ import { calculateHours } from '../../../utils/calculateTime'
 
 interface TimerProps {
   time: string
+  isCancelled: string
   className?: string
   fontSize?: string
 }
 
-const Timer = ({ time, className = '', fontSize = '' }: TimerProps) => {
-  console.log(time)
-
+const Timer = ({
+  time,
+  isCancelled,
+  className = '',
+  fontSize = '',
+}: TimerProps) => {
   const [dhours, dminutes] = calculateHours(time)
-  const textcolor = parseInt(dhours) < 1 ? 'text-red-700' : 'text-green-500'
+  const textcolor =
+    parseInt(dhours) < 1 || isCancelled ? 'text-red-700' : 'text-green-500'
+
+  const returnTime = isCancelled ? `Cancelled` : `${dhours}:${dminutes}`
 
   return (
     <div
@@ -20,7 +27,7 @@ const Timer = ({ time, className = '', fontSize = '' }: TimerProps) => {
       <h5
         className={`text-lg lg:text-2xl font-semibold ${textcolor} ${fontSize}`}
       >
-        {dhours}:{dminutes}
+        {returnTime}
       </h5>
     </div>
   )

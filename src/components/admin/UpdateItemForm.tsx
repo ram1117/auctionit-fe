@@ -29,7 +29,7 @@ const UpdateItemForm = ({ notforSale, itemId }: UpdateItemFormProps) => {
       <FormSubmit
         pendingText="Updating.."
         buttonText="Not For Sale"
-        className={`${buttonStyle}`}
+        className={`${buttonStyle} shadow-lg shadow-slate-300`}
       />
       {formState.errors['_form'] && (
         <p className="text-red-700 text-xs">

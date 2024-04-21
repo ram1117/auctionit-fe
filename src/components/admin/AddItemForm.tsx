@@ -36,15 +36,11 @@ const AddItemForm = ({ setFormOpen }: AddItemFormProps) => {
     })
   }, [])
 
-  useEffect(() => {
-    console.log(formState.success)
-  }, [formState.success])
-
   return (
     <section className="fixed inset-0 backdrop-blur-md flex flex-col items-center justify-center z-[999]">
       <form
         action={formAction}
-        className="w-10/12 lg:w-2/3 max-w-[650px] bg-white p-4 rounded-lg border-primary"
+        className="w-10/12 lg:w-2/3 max-w-[650px] bg-white p-4 lg:p-8 rounded-lg border-2 border-primary"
       >
         <InputField
           type="text"

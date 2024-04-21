@@ -67,7 +67,7 @@ const Page = () => {
         {loading && <p className="text-center">loading</p>}
         {error && <p className="text-center">Error getting data</p>}
         {!loading && (
-          <ul className="my-4 lg:my-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          <ul className="my-4 lg:my-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 grid-height">
             {items.map((item: any) => (
               <ItemCard item={item} key={item.id} />
             ))}

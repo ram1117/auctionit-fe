@@ -12,6 +12,7 @@ interface BiddingProps {
   auctionId: string
   auctionEnded: boolean
   userRole: string
+  isCancelled: boolean
 }
 
 export interface PlacebidFormStateType {
@@ -27,6 +28,7 @@ const Bidding = ({
   auctionId,
   auctionEnded,
   userRole,
+  isCancelled,
 }: BiddingProps) => {
   const [bid, setBid] = useState(topBid)
   const bidValue = bid ? bid.price : 0
@@ -73,7 +75,7 @@ const Bidding = ({
           </div>
         )}
       </div>
-      {!auctionEnded && userRole === 'user' && (
+      {!auctionEnded && userRole === 'user' && !isCancelled && (
         <form
           className="w-full grid grid-cols-2 gap-4 items-center"
           action={formAction}
