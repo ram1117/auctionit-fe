@@ -5,6 +5,7 @@ import BackButton from '../../../atoms/BackButton'
 import { getAdminItems } from '../../../services/apiService'
 import ItemCard from '../../../components/admin/ItemCard'
 import AddItemForm from '../../../components/admin/AddItemForm'
+import Loader from '../../../atoms/Loadert'
 
 enum STATUS {
   SOLD = 'sold',
@@ -45,7 +46,7 @@ const Page = () => {
         </h1>
         <button
           onClick={handleFormButtonClick}
-          className="border-1 py-1 px-2 lg:px-4 bg-button-primary text-white shadow-md shadow-slate-300 rounded-lg"
+          className="border-1 py-2 px-2 lg:px-4 bg-button-primary text-white rounded-lg text-sm lg:text-base font-medium font-roboto track-wider"
         >
           Add item
         </button>
@@ -64,7 +65,7 @@ const Page = () => {
         </li>
       </ul>
       <div className="">
-        {loading && <p className="text-center">loading</p>}
+        {loading && <Loader></Loader>}
         {error && <p className="text-center">Error getting data</p>}
         {!loading && (
           <ul className="my-4 lg:my-8 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-2 xl:grid-cols-3 gap-4 grid-height">
