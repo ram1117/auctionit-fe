@@ -28,7 +28,7 @@ const MobileMenu = ({ role }: MobileMenuProps) => {
       {openMenu && (
         <>
           <div className="absolute h-0 w-0 top-10 right-6 border-x-8 border-x-transparent border-b-[16px] border-b-slate-100"></div>
-          <div className="absolute right-4 bg-slate-100 z-[999] top-14 w-2/3 shadow-lg shadow-slate-200 rounded-lg w-max p-6">
+          <div className="absolute right-4 bg-slate-100 z-[999] top-14 w-2/3 shadow-md shadow-slate-300 rounded-lg w-max p-6">
             <NavList role={role} />
           </div>
         </>

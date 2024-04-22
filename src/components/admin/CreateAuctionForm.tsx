@@ -44,7 +44,7 @@ const CreateAuctionForm = ({ item_id }: CreateAuctionFormProps) => {
   return (
     <>
       <button
-        className="py-2 px-4 bg-button-primary text-white font-semibold rounded-lg shadow-lg shadow-slate-300"
+        className="py-2 px-4 bg-button-primary text-white font-semibold rounded-lg shadow-md shadow-slate-300"
         onClick={handleClick}
       >
         + Create

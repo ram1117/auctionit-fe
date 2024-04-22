@@ -21,7 +21,7 @@ const AuctionItem = ({ auction }: AuctionItemProps) => {
 
   return (
     <Link href={`/auctions/${auction.id}`}>
-      <li className="rounded-md p-4 flex flex-col items-center justify-center gap-4 bg-white shadow-lg shadow-slate-200">
+      <li className="rounded-xl p-4 flex flex-col items-center justify-center gap-4 bg-white shadow-md shadow-slate-300">
         <ImageWrapper
           src={image}
           alt="item image"

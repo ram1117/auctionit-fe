@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import './globals.css'
-import { roboto, notosansjp, lobstertwo } from '../atoms/fonts'
+import { roboto, notosansjp, lobstertwo, nunito } from '../atoms/fonts'
 import RightPanel from '../components/rightpanel/RightPanel'
 import NavPanel from '../components/navbar/NavPanel'
 
@@ -18,10 +18,10 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${notosansjp.variable} ${roboto.variable} ${lobstertwo.variable}`}
+      className={`${notosansjp.variable} ${roboto.variable} ${lobstertwo.variable} ${nunito.variable}`}
     >
       <body className="font-notosansjp flex flex-col items-center justify-center min-h-screen text-primary-text">
-        <div className="max-w-[1720px] w-full min-h-[100vh] bg-white flex flex-col lg:flex-row shadow-lg shadow-slate-300">
+        <div className="max-w-[1720px] w-full min-h-[100vh] bg-white flex flex-col lg:flex-row shadow-md shadow-slate-300">
           <section className="w-full lg:w-2/12">
             <NavPanel />
           </section>

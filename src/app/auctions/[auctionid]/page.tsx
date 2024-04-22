@@ -11,8 +11,7 @@ import { getUserRole } from '../../../utils/authHelpers'
 const AuctionPage = async ({ params }: { params: { auctionid: string } }) => {
   const auctionId = params.auctionid
   const auction = await getAuction(auctionId)
-  const userRole = getUserRole() || ''
-
+  const userRole = (await getUserRole()) || ''
   if (auction.error) {
     return (
       <main className="p-4">
@@ -37,15 +36,15 @@ const AuctionPage = async ({ params }: { params: { auctionid: string } }) => {
       <BackButton />
       <section className="px-2 lg:px-10 my-4">
         <header className="flex items-center justify-between">
-          <h1 className="text-xl gap-4 lg:text-4xl font-bold">
+          <h1 className="text-xl gap-4 lg:text-4xl font-bold font-nunito">
             {auction.item.name}
           </h1>
           <FollowPanel auctionId={auctionId} subscription={subscription} />
         </header>
 
         <div className="w-full my-4 lg:my-6 ">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 p-2">
-            <div className="relative p-4 flex flex-col items-center justify-center rounded-xl shadow-lg shadow-slate-300">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="relative p-4 flex flex-col items-center justify-center rounded-xl shadow-md shadow-slate-300 bg-white ">
               <ImageWrapper
                 src={itemImage}
                 alt="auction item image"
@@ -65,7 +64,7 @@ const AuctionPage = async ({ params }: { params: { auctionid: string } }) => {
               )}
             </div>
 
-            <div className=" p-2 rounded-xl shadow-lg shadow-slate-300">
+            <div className=" p-2 rounded-xl shadow-md shadow-slate-300 bg-white ">
               <div className="grid grid-cols-2">
                 {
                   <Timer
@@ -85,7 +84,7 @@ const AuctionPage = async ({ params }: { params: { auctionid: string } }) => {
               />
             </div>
           </div>
-          <div className="p-8 rounded-xl shadow-lg shadow-slate-300">
+          <div className="p-8 my-8 rounded-xl shadow-md shadow-slate-300 bg-white ">
             <h5 className="tracking-tight text-lg uppercase font-roboto font-medium">
               Information
             </h5>

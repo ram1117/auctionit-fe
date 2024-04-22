@@ -34,10 +34,10 @@ const Page = () => {
   return (
     <main className="p-4">
       <BackButton />
-      <div className="flex justify-between p-4 items-center flex-col md:flex-row gap-2">
-        <h2 className="text-lg lg:text-xl font-semibold uppercase lg:my-4">
+      <div className="flex justify-between px-4 py-2 items-center flex-col md:flex-row gap-2 border-b">
+        <h1 className="track-wider text-lg lg:text-2xl font-bold font-nunito lg:my-4">
           Auctions
-        </h2>
+        </h1>
         <ul className="flex gap-2 lg:gap-4 justify-center sm:justify-end items-center text-sm">
           <li className="border-r border-r-black px-2">
             <button onClick={() => handleClick(STATUS.ALL)}>All</button>

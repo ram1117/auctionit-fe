@@ -4,16 +4,15 @@ import ImageWrapper from '../../atoms/ImageWrapper'
 import UserIcon from '@/public/icons/user.svg'
 import NickName from '../../components/account/NickName'
 import Password from '../../components/account/Password'
+import PageHeader from '../../atoms/PageHeader'
 
 const AccountPage = async () => {
   const userInfo = await getUserInfo()
   return (
     <main className="min-h-screen p-4">
       <BackButton />
-      <h1 className="pb-4 w-max mx-auto track-tight text-lg lg:text-2xl font-bold text-center border-b">
-        Account
-      </h1>
-      <section className="max-w-[650px] my-8 mx-auto bg-white rounded-md shadow-lg shadow-slate-300 px-4">
+      <PageHeader title="Account" />
+      <section className="max-w-[650px] my-8 mx-auto bg-white rounded-md shadow-md shadow-slate-300 px-4">
         <div className="my-4 p-4 flex justify-center items-start lg:items-center justify-between border-b flex-col lg:flex-row gap-4">
           <div className="flex gap-2 items-center justify-center">
             <ImageWrapper
