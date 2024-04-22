@@ -44,7 +44,7 @@ const CreateAuctionForm = ({ item_id }: CreateAuctionFormProps) => {
   return (
     <>
       <button
-        className="py-2 px-4 bg-button-primary text-white font-semibold rounded-lg shadow-md shadow-slate-300"
+        className="py-2 px-4 bg-button-primary text-white text-sm lg:text-base font-medium font-roboto track-wider rounded-lg shadow-md shadow-slate-300"
         onClick={handleClick}
       >
         + Create
@@ -106,7 +106,7 @@ const CreateAuctionForm = ({ item_id }: CreateAuctionFormProps) => {
             <div className="flex items-center justify-between flex-col gap-2 lg:gap-4 md:flex-row">
               <FormSubmit className="px-12" />
               <button
-                className="py-2 px-12 bg-slate-200 border rounded-md"
+                className="py-2 px-6 bg-slate-200 border rounded-md text-sm lg:text-base font-medium font-roboto track-wider"
                 onClick={() => setOpenForm((prev) => !prev)}
               >
                 Cancel

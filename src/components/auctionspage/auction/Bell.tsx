@@ -42,7 +42,7 @@ const Bell = ({ auctionId, enabled }: BellProps) => {
         <ImageWrapper
           src={loading ? LoadingIcon : BellIcon}
           alt={loading ? 'Loading Icon' : 'Notification Bell Icon'}
-          containerClassName="h-8 w-8 lg:h-10 lg:w-10 shadow-md shadow-slate-300 rounded-full"
+          containerClassName="h-8 w-8 lg:h-10 lg:w-10 shadow-md shadow-slate-300 rounded-full bg-white"
           className="p-2"
         />
       </button>
