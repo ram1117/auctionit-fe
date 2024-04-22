@@ -5,6 +5,7 @@ import BackButton from '../../../atoms/BackButton'
 import { getAdminAuctions } from '../../../services/apiService'
 import AuctionCard from '../../../components/admin/AuctionCard'
 import Loader from '../../../atoms/Loadert'
+import ErrorUi from '../../../atoms/ErrorUi'
 
 enum STATUS {
   ALL = 'all',
@@ -59,7 +60,7 @@ const Page = () => {
 
       <div className="">
         {loading && <Loader></Loader>}
-        {error && <p className="text-center">Error getting data</p>}
+        {error && <ErrorUi title="Error getting data.." />}
         {!loading && (
           <ul className="my-4 lg:my-8 grid grid-cols-1 md:grid-cols-2 xxl:grid-cols-3 gap-4">
             {auctions.map((auction: any) => (

@@ -6,6 +6,7 @@ import AuctionItem from './AuctionItem'
 import CategoriesContainer from '../rightpanel/CategoriesContainer'
 import { SORT_BY } from '../../constants'
 import Loader from '../../atoms/Loadert'
+import ErrorUi from '../../atoms/ErrorUi'
 
 interface AuctionsContainerProps {
   categories: any
@@ -98,11 +99,7 @@ const AuctionsContainer = ({ categories }: AuctionsContainerProps) => {
         </li>
       </ul>
 
-      {hasError && (
-        <h2 className="text-center text-base lg:text-lg text-red-700 my-18">
-          Error fetching data
-        </h2>
-      )}
+      {hasError && <ErrorUi title="Error getting auctions.." />}
       <div>
         {auctions.length === 0 && !loading && (
           <h2 className="text-center text-base lg:text-lg my-18">

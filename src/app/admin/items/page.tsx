@@ -6,6 +6,7 @@ import { getAdminItems } from '../../../services/apiService'
 import ItemCard from '../../../components/admin/ItemCard'
 import AddItemForm from '../../../components/admin/AddItemForm'
 import Loader from '../../../atoms/Loadert'
+import ErrorUi from '../../../atoms/ErrorUi'
 
 enum STATUS {
   SOLD = 'sold',
@@ -66,7 +67,7 @@ const Page = () => {
       </ul>
       <div className="">
         {loading && <Loader></Loader>}
-        {error && <p className="text-center">Error getting data</p>}
+        {error && <ErrorUi title="Error getting data.." />}
         {!loading && (
           <ul className="my-4 lg:my-8 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-2 xl:grid-cols-3 gap-4 grid-height">
             {items.map((item: any) => (
