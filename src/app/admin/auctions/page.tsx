@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import BackButton from '../../../atoms/BackButton'
-import { getAdminAuctions } from '../../../services/apiService'
+import { GetAuctionsAction } from '../../../actions/data/dataserveractions'
 import AuctionCard from '../../../components/admin/AuctionCard'
 import Loader from '../../../atoms/Loadert'
 import ErrorUi from '../../../atoms/ErrorUi'
@@ -21,7 +21,7 @@ const Page = () => {
   const [error, setError] = useState('')
 
   useEffect(() => {
-    getAdminAuctions(auctionStatus).then((response) => {
+    GetAuctionsAction(auctionStatus).then((response) => {
       if (response.error) {
         setError(response.message)
       } else setAuctions(response)

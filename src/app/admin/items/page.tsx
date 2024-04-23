@@ -2,11 +2,11 @@
 
 import { useEffect, useState } from 'react'
 import BackButton from '../../../atoms/BackButton'
-import { getAdminItems } from '../../../services/apiService'
 import ItemCard from '../../../components/admin/ItemCard'
 import AddItemForm from '../../../components/admin/AddItemForm'
 import Loader from '../../../atoms/Loadert'
 import ErrorUi from '../../../atoms/ErrorUi'
+import { GetItemsAction } from '../../../actions/data/dataserveractions'
 
 enum STATUS {
   SOLD = 'sold',
@@ -22,7 +22,7 @@ const Page = () => {
   const [formOpen, setFormOpen] = useState(false)
 
   useEffect(() => {
-    getAdminItems(itemStatus).then((response) => {
+    GetItemsAction(itemStatus).then((response) => {
       setLoading(false)
       if (response.error) {
         setError(response.message)
