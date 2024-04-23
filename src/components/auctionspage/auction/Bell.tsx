@@ -4,9 +4,9 @@ import ImageWrapper from '../../../atoms/ImageWrapper'
 import BellEnabled from '@/public/icons/bell.svg'
 import BellDisabled from '@/public/icons/bell-disabled.svg'
 import LoadingIcon from '@/public/icons/loading.svg'
-import { updateNotification } from '../../../services/apiService'
 import { useState } from 'react'
 import getPushNotificationToken from '../../../utils/usePushNotificationToken'
+import { UpdateNotificationAction } from '../../../actions/data/dataserveractions'
 
 interface BellProps {
   auctionId: string
@@ -31,12 +31,12 @@ const Bell = ({ auctionId, enabled }: BellProps) => {
 
     const fcmToken = await getPushNotificationToken()
     if (fcmToken) {
-      const notificationResponse = await updateNotification(
+      const notificationResponse = await UpdateNotificationAction(
         auctionId,
         enabled,
         fcmToken
       )
-      if (notificationResponse.status !== 201) {
+      if (notificationResponse.error) {
         setErrors('Unable to set notification')
       }
     }
