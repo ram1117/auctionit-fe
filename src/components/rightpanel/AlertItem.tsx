@@ -1,7 +1,5 @@
 import Link from 'next/link'
 import React from 'react'
-import ImageWrapper from '../../atoms/ImageWrapper'
-import AlertIcon from '@/public/icons/alert.svg'
 
 interface AlertItemProps {
   alert: any
@@ -9,16 +7,13 @@ interface AlertItemProps {
 
 const AlertItem = ({ alert }: AlertItemProps) => {
   return (
-    <Link href={alert.href} target="_blank">
+    <Link href={alert.href}>
       <li className="border rounded-lg p-2 flex gap-2 items-center">
-        <ImageWrapper
-          src={AlertIcon}
-          alt="alert icon"
-          containerClassName="h-10 w-10 border rounded-full border-secondary"
-          className="p-1"
-        />
+        <div className="">
+          <p className="p-2 text-2xl font-black">!</p>
+        </div>
         <div>
-          <h4 className="text-lg font-bold text-green-500">{alert.title}</h4>
+          <h4 className="text-lg font-bold">{alert.title}</h4>
           <h5 className="text-sm">${alert.data}</h5>
         </div>
       </li>

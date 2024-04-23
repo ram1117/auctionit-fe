@@ -6,6 +6,7 @@ import BellDisabled from '@/public/icons/bell-disabled.svg'
 import LoadingIcon from '@/public/icons/loading.svg'
 import { updateNotification } from '../../../services/apiService'
 import { useState } from 'react'
+import getPushNotificationToken from '../../../utils/usePushNotificationToken'
 
 interface BellProps {
   auctionId: string
@@ -28,9 +29,16 @@ const Bell = ({ auctionId, enabled }: BellProps) => {
     e.preventDefault()
     setLoading(true)
 
-    const notificationResponse = await updateNotification(auctionId, enabled)
-    if (notificationResponse.status !== 201) {
-      setErrors('Unable to set notification')
+    const fcmToken = await getPushNotificationToken()
+    if (fcmToken) {
+      const notificationResponse = await updateNotification(
+        auctionId,
+        enabled,
+        fcmToken
+      )
+      if (notificationResponse.status !== 201) {
+        setErrors('Unable to set notification')
+      }
     }
     setIconEnabled((prev) => !prev)
     setLoading(false)
