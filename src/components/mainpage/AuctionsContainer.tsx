@@ -85,7 +85,7 @@ const AuctionsContainer = ({ categories }: AuctionsContainerProps) => {
         handleCategoryClick={handleCategoryClick}
         categories={categories}
       />
-      <ul className="flex gap-2 lg:gap-4 justify-center sm:justify-end items-center text-sm">
+      <ul className="flex my-4 gap-2 lg:gap-4 justify-center sm:justify-end items-center text-sm">
         <li className="border-r border-r-black px-2">
           <button onClick={() => handleClick(SORT_BY.NEWEST)}>Newest</button>
         </li>
