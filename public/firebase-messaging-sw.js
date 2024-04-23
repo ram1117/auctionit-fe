@@ -24,9 +24,15 @@ if (messaging) {
   try {
     messaging.onBackgroundMessage(messaging, (payload) => {
       console.log(payload)
-      const notificationTitle = 'payload.data.title'
+      const notificationTitle = payload.data.title
+      const notificationOptions = {
+        body: payload.data.body,
+      }
 
-      return self.registration.showNotification(notificationTitle)
+      return self.registration.showNotification(
+        notificationTitle,
+        notificationOptions
+      )
     })
   } catch (err) {
     console.log(err)
