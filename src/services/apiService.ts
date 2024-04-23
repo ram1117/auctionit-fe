@@ -137,30 +137,15 @@ export const updateNotification = (
   token: string
 ) => {
   if (enabled)
-    return apiPostRequest(
+    return apiPostRequestSSR(
       `${baseUrl}/notification/unsubscribe/${id}?token=${token}`,
       {}
     )
   else
-    return apiPostRequest(
+    return apiPostRequestSSR(
       `${baseUrl}/notification/subscribe/${id}?token=${token}`,
       {}
     )
-}
-
-export const getTokenFromDatabase = () => {
-  return apiGetRequest(`${baseUrl}/notification/tokens/`)
-}
-
-export const postNotificationToken = (token: string) => {
-  return apiPostRequest(`${baseUrl}/notification/token/`, {
-    device_type: 'browser',
-    notification_token: token,
-  })
-}
-
-export const subscribeToFirebaseTopics = () => {
-  return apiPostRequest(`${baseUrl}/notification/subscribeall`, {})
 }
 
 export const updateUsername = async (data: any) => {
@@ -172,7 +157,7 @@ export const updatePassword = async (data: any) => {
 }
 
 export const getAdminItems = async (status: string) => {
-  return apiGetRequest(`${baseUrl}/items/allitems?status=${status}`)
+  return apiGetRequestSSR(`${baseUrl}/items/allitems?status=${status}`)
 }
 
 export const getItemDetails = (id: string) => {
@@ -196,7 +181,7 @@ export const createNewAuction = (data: any) => {
 }
 
 export const getAdminAuctions = (status: string) => {
-  return apiGetRequest(`${baseUrl}/auctions/admin/auctions?status=${status}`)
+  return apiGetRequestSSR(`${baseUrl}/auctions/admin/auctions?status=${status}`)
 }
 
 export const cancelAuction = (itemId: string) => {
