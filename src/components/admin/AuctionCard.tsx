@@ -20,7 +20,7 @@ const AuctionCard = ({ auction }: AuctionCardProps) => {
       : `${dHour}:${dMins}`
 
   return (
-    <li className="relative grid grid-cols-5 px-4 py-12 lg:px-8 gap-2 rounded-lg bg-white shadow-lg shadow-slate-300">
+    <li className="relative grid grid-cols-5 px-4 py-12 lg:px-8 gap-2 rounded-lg bg-white shadow-md shadow-slate-300">
       <div className="col-span-2">
         <ImageWrapper
           src={ItemImage}

@@ -42,6 +42,7 @@ const config: Config = {
         notosansjp: 'var(--var-notosansjp)',
         lobstertwo: 'var(--var-lobstertwo)',
         roboto: 'var(--var-roboto)',
+        nunito: 'var(--var-nunito)',
       },
       backgroundColor: {
         'body-bg': '#dce0ed',

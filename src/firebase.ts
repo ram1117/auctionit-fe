@@ -1,6 +1,7 @@
 'use client'
 
 import { initializeApp } from 'firebase/app'
+import { getMessaging } from 'firebase/messaging'
 
 const FIREBASE_CONFIG = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
@@ -14,3 +15,9 @@ const FIREBASE_CONFIG = {
 
 const firebaseApp = initializeApp(FIREBASE_CONFIG)
 export default firebaseApp
+
+let messaging: ReturnType<typeof getMessaging>
+if (typeof window !== 'undefined') {
+  messaging = getMessaging(firebaseApp)
+}
+export { messaging }

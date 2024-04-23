@@ -18,7 +18,7 @@ const SubscribeItem = ({ auction, price }: SubscribeItemProps) => {
 
   return (
     <Link href={`/auctions/${auction.id}`}>
-      <li className="border rounded-lg flex gap-2 items-center p-4 shadow-lg shadow-slate-300">
+      <li className="border rounded-lg flex gap-2 items-center p-4 shadow-md shadow-slate-300">
         <ImageWrapper
           src={itemImage}
           alt="Item Image"

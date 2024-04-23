@@ -36,7 +36,7 @@ const Password = () => {
         </div>
 
         <button
-          className="px-6 py-1 rounded-lg bg-button-primary text-white"
+          className="px-6 py-2 rounded-lg bg-button-primary text-white text-sm lg:text-base font-medium font-roboto track-wider"
           onClick={handleClick}
         >
           Change

@@ -131,10 +131,21 @@ export const postBid = async (data: any) => {
   return apiPostRequestSSR(`${baseUrl}/bid`, data)
 }
 
-export const updateNotification = (id: string, enabled: boolean) => {
+export const updateNotification = (
+  id: string,
+  enabled: boolean,
+  token: string
+) => {
   if (enabled)
-    return apiPostRequest(`${baseUrl}/notification/unsubscribe/${id}`, {})
-  else return apiPostRequest(`${baseUrl}/notification/subscribe/${id}`, {})
+    return apiPostRequest(
+      `${baseUrl}/notification/unsubscribe/${id}?token=${token}`,
+      {}
+    )
+  else
+    return apiPostRequest(
+      `${baseUrl}/notification/subscribe/${id}?token=${token}`,
+      {}
+    )
 }
 
 export const getTokenFromDatabase = () => {
@@ -146,6 +157,10 @@ export const postNotificationToken = (token: string) => {
     device_type: 'browser',
     notification_token: token,
   })
+}
+
+export const subscribeToFirebaseTopics = () => {
+  return apiPostRequest(`${baseUrl}/notification/subscribeall`, {})
 }
 
 export const updateUsername = async (data: any) => {

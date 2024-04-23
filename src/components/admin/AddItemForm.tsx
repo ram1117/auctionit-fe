@@ -107,7 +107,7 @@ const AddItemForm = ({ setFormOpen }: AddItemFormProps) => {
         <div className="flex items-center justify-between flex-col gap-2 lg:gap-4 md:flex-row">
           <FormSubmit className="px-12" />
           <button
-            className="py-2 px-12 bg-slate-200 border rounded-md"
+            className="py-2 px-6 bg-slate-200 border rounded-md text-sm lg:text-base font-medium font-roboto track-wider"
             onClick={() => setFormOpen((prev) => !prev)}
           >
             Cancel

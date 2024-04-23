@@ -9,7 +9,7 @@ const Item = ({ item }: ItemProps) => {
   const image = item.imageUrl === '' ? NoimageImage : item.imageUrl
 
   return (
-    <li className="rounded-md p-4 flex flex-col items-center justify-center gap-4 bg-white shadow-lg shadow-slate-200 aspect-square">
+    <li className="rounded-md p-4 flex flex-col items-center justify-center gap-4 bg-white shadow-md shadow-slate-300 aspect-square">
       <ImageWrapper
         src={image}
         alt="item image"

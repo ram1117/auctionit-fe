@@ -1,4 +1,9 @@
-import { Roboto_Condensed, Noto_Sans_JP, Lobster_Two } from 'next/font/google'
+import {
+  Roboto_Condensed,
+  Noto_Sans_JP,
+  Lobster_Two,
+  Nunito,
+} from 'next/font/google'
 
 export const notosansjp = Noto_Sans_JP({
   variable: '--var-notosansjp',
@@ -14,5 +19,10 @@ export const lobstertwo = Lobster_Two({
 
 export const roboto = Roboto_Condensed({
   variable: '--var-roboto',
+  subsets: ['latin'],
+})
+
+export const nunito = Nunito({
+  variable: '--var-nunito',
   subsets: ['latin'],
 })

@@ -1,9 +1,7 @@
+import Loader from '../atoms/Loadert'
+
 const Loading = () => {
-  return (
-    <div>
-      <h2>Loading....</h2>
-    </div>
-  )
+  return <Loader />
 }
 
 export default Loading

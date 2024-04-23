@@ -8,7 +8,7 @@ interface CategoryItemProps {
 const CategoryItem = ({ category, handleCategoryClick }: CategoryItemProps) => {
   return (
     <button
-      className="capitalize tracking-tight text-sm gap-2 border rounded-md py-1 lg:py-2 px-2"
+      className="capitalize tracking-tight text-sm gap-2 rounded-md py-1 lg:py-2 px-2 bg-white shadow-md shadow-slate-300"
       onClick={() => {
         handleCategoryClick(category.id)
       }}

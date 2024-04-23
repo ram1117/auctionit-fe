@@ -17,7 +17,6 @@ export const middleware = (request: NextRequest) => {
 export const config = {
   matcher: [
     '/account/:path*',
-    '/subscribed/:path*',
     '/auctions/:path*',
     '/items/:path*',
     '/admin/:path*',
